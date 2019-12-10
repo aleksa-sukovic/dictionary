@@ -3,7 +3,6 @@
 namespace Dictionary\Library\Exceptions;
 
 use Exception;
-use Throwable;
 
 class DBException extends Exception
 {
