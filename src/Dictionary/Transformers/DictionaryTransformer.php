@@ -7,6 +7,13 @@ use Dictionary\Library\Transformers\ObjectTransformer;
 
 class DictionaryTransformer extends ObjectTransformer
 {
+    protected $fields = [
+        'id' => 'int',
+        'name' => 'string',
+        'language_code' => 'string',
+        'description' => 'string',
+    ];
+
     public function transform($array)
     {
         return new Dictionary(
@@ -16,4 +23,15 @@ class DictionaryTransformer extends ObjectTransformer
             $array['description']
         );
     }
+
+    public function transformToArray($object)
+    {
+        return [
+            'id' => $object->id,
+            'language_code' => $this->transformString($object->languageCode),
+            'name' => $this->transformNullableString($object->name),
+            'description' => $this->transformNullableString($object->description),
+        ];
+    }
 }
+

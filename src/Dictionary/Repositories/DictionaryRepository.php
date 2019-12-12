@@ -2,33 +2,49 @@
 
 namespace Dictionary\Dictionary\Repositories;
 
+use Dictionary\Dictionary\Models\Dictionary;
 use Dictionary\Dictionary\Transformers\DictionaryTransformer;
+use Dictionary\Library\Exceptions\ItemNotDeletedException;
 use Dictionary\Library\Exceptions\ItemNotFoundException;
+use Dictionary\Library\Exceptions\ItemNotSavedException;
 use Dictionary\Library\Repositories\ObjectRepository;
 use mysqli as MySQL;
 
 class DictionaryRepository extends ObjectRepository
 {
     protected $tableName = 'dictionaries';
+    protected $primaryKey = 'id';
 
     public function __construct(MySQL $connection)
     {
         parent::__construct($connection);
-        $this->transformer = new DictionaryTransformer();
+        $this->transformer = new DictionaryTransformer($connection);
     }
 
-    public function findById($id)
-    {
-        $result = $this->connection
-            ->query('SELECT * FROM dictionaries WHERE id = ' . $this->connection->escape_string($id));
-        $item = $result->fetch_assoc();
-        $this->connection->insert_id
-        if (!$item) {
-            throw new ItemNotFoundException();
-        }
+     public function insert($dictionary)
+     {
+         $data = $this->transformer->transformToArray($dictionary);
+         $columns = '(' . implode(', ', array_keys($data)) . ')';
+         $values = '(' . implode(', ', array_values($data)) . ')';
+         $query = "INSERT INTO $this->tableName $columns VALUES $values";
 
-        $transformed = $this->transformer->transform($item);
-        mysqli_free_result($result);
-        return $transformed;
-    }
+         if (!$this->connection->query($query)) {
+             throw new ItemNotSavedException();
+         }
+
+         return $this->findById($this->connection->insert_id);
+     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

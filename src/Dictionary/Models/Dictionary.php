@@ -4,10 +4,10 @@ namespace Dictionary\Dictionary\Models;
 
 class Dictionary
 {
-    protected $id;
-    protected $languageCode;
-    protected $name;
-    protected $description;
+    public $id;
+    public $languageCode;
+    public $name;
+    public $description;
 
     public function __construct($id, $languageCode, $name, $description = null)
     {
