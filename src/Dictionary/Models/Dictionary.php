@@ -21,4 +21,14 @@ class Dictionary
     {
         return $this->name;
     }
+
+    public function __toArray()
+    {
+        return [
+            'id' => $this->id,
+            'language_code' => $this->languageCode,
+            'name' => $this->name,
+            'description' => $this->description,
+        ];
+    }
 }

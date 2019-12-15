@@ -8,30 +8,20 @@ use Dictionary\Library\Transformers\ObjectTransformer;
 class DictionaryTransformer extends ObjectTransformer
 {
     protected $fields = [
-        'id' => 'int',
-        'name' => 'string',
+        'id'            => 'int',
+        'name'          => 'string',
         'language_code' => 'string',
-        'description' => 'string',
+        'description'   => 'string:nullable',
     ];
 
-    public function transform($array)
+    public function toObject($array)
     {
         return new Dictionary(
-            $array['id'],
-            $array['language_code'],
-            $array['name'],
-            $array['description']
+            $array['id'] ?? 0,
+            $array['language_code'] ?? '',
+            $array['name'] ?? '',
+            $array['description'] ?? ''
         );
-    }
-
-    public function transformToArray($object)
-    {
-        return [
-            'id' => $object->id,
-            'language_code' => $this->transformString($object->languageCode),
-            'name' => $this->transformNullableString($object->name),
-            'description' => $this->transformNullableString($object->description),
-        ];
     }
 }
 

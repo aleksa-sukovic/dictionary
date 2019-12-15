@@ -18,42 +18,52 @@ abstract class ObjectTransformer
         $this->connection = $connection;
     }
 
-    public abstract function transform($array);
-    public abstract function transformToArray($object);
+    public abstract function toObject($array);
 
-    public function transformMany(MySqlResult $set)
+    public function toObjectArray(MySqlResult $set)
     {
         $output = [];
 
         while ($item = $set->fetch_assoc()) {
-            $output[] = $this->transform($item);
+            $output[] = $this->toObject($item);
         }
 
         return $output;
     }
 
-    public function transformField($value, $fieldName)
+    public function toSqlArray($data)
     {
-        if (!isset($this->fields[$fieldName])) {
-            die('Field not found.');
+        $array = [];
+
+        foreach ($data as $key => $value) {
+            if (array_key_exists($key, $this->fields)) {
+                $array[$key] = $this->sqlValue($value, $key);
+            }
         }
 
+        return $array;
+    }
+
+    public function sqlValue($value, $fieldName)
+    {
         switch ($this->fields[$fieldName]) {
             case 'int':
                 return intval($value);
             case 'string':
-                return "'" . $this->connection->escape_string($value) . "'";
+                return $this->sqlString($value);
+            case 'string:nullable':
+                return $this->sqlNullableString($value);
             default:
                 return null;
         }
     }
 
-    public function transformNullableString($string)
+    public function sqlNullableString($string)
     {
         return $string ? "'" . $this->connection->escape_string($string) . "'" : 'null';
     }
 
-    public function transformString($string)
+    public function sqlString($string)
     {
         return $string ? "'" . $this->connection->escape_string($string) . "'" : "''";
     }
