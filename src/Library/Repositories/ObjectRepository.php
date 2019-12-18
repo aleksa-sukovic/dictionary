@@ -63,9 +63,9 @@ class ObjectRepository
         }
     }
 
-    public function create($data)
+    public function create($params)
     {
-        $data = $this->transformer->toSqlArray($data);
+        $data = $this->transformer->toSqlArray($params);
 
         $columns = '(' . implode(', ', array_keys($data)) . ')';
         $values = '(' . implode(', ', array_values($data)) . ')';
@@ -75,7 +75,11 @@ class ObjectRepository
             throw new ItemNotSavedException();
         }
 
-        return $this->findById($this->connection->insert_id);
+        if ($this->connection->insert_id) {
+            return $this->findById($this->connection->insert_id);
+        } else {
+            return $this->findById($params[$this->primaryKey]);
+        }
     }
 
     public function update($data)
