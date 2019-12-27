@@ -1,6 +1,6 @@
 <?php
 
-namespace Dictionary\Library\Transformers;
+namespace Aleksa\Library\Transformers;
 
 use mysqli_result as MySqlResult;
 use mysqli as MySQL;

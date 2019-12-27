@@ -1,9 +1,9 @@
 <?php
 
-namespace Dictionary\Language\Transformers;
+namespace Aleksa\Language\Transformers;
 
-use Dictionary\Language\Models\Language;
-use Dictionary\Library\Transformers\ObjectTransformer;
+use Aleksa\Language\Models\Language;
+use Aleksa\Library\Transformers\ObjectTransformer;
 
 class LanguageTransformer extends ObjectTransformer
 {

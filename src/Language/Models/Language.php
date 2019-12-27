@@ -1,6 +1,6 @@
 <?php
 
-namespace Dictionary\Language\Models;
+namespace Aleksa\Language\Models;
 
 class Language
 {

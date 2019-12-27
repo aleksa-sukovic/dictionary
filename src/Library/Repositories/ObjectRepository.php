@@ -1,11 +1,11 @@
 <?php
 
-namespace Dictionary\Library\Repositories;
+namespace Aleksa\Library\Repositories;
 
-use Dictionary\Library\Exceptions\ItemNotDeletedException;
-use Dictionary\Library\Exceptions\ItemNotFoundException;
-use Dictionary\Library\Exceptions\ItemNotSavedException;
-use Dictionary\Library\Transformers\ObjectTransformer;
+use Aleksa\Library\Exceptions\ItemNotDeletedException;
+use Aleksa\Library\Exceptions\ItemNotFoundException;
+use Aleksa\Library\Exceptions\ItemNotSavedException;
+use Aleksa\Library\Transformers\ObjectTransformer;
 use mysqli as MySQL;
 
 class ObjectRepository

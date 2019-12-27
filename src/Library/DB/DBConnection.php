@@ -1,8 +1,8 @@
 <?php
 
-namespace Dictionary\Library\DB;
+namespace Aleksa\Library\DB;
 
-use Dictionary\Library\Exceptions\DBException;
+use Aleksa\Library\Exceptions\DBException;
 use \mysqli as MySqli;
 
 class DBConnection
@@ -10,12 +10,12 @@ class DBConnection
     /**
      * @var MySqli
      */
-    private static $connection = null;
+    private static ?MySqli $connection = null;
 
-    private static $HOST = 'localhost';
-    private static $USER = 'root';
-    private static $PASS = '';
-    private static $DB   = 'dictionary';
+    private static string $HOST = 'db';
+    private static string $USER = 'root';
+    private static string $PASS = 'root';
+    private static string $DB   = 'dictionary';
 
     public static function getConnection(): MySqli
     {
@@ -39,7 +39,7 @@ class DBConnection
             DBConnection::$HOST,
             DBConnection::$USER,
             DBConnection::$PASS,
-            DBConnection::$DB
+            DBConnection::$DB,
         );
 
         if ($connection->connect_error) {

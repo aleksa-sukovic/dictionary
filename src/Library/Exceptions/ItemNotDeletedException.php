@@ -1,6 +1,6 @@
 <?php
 
-namespace Dictionary\Library\Exceptions;
+namespace Aleksa\Library\Exceptions;
 
 use Exception;
 

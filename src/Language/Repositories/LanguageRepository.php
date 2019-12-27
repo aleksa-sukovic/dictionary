@@ -1,10 +1,10 @@
 <?php
 
-namespace Language\Dictionary\Repositories;
+namespace Aleksa\Language\Repositories;
 
 use mysqli as MySQL;
-use Dictionary\Library\Repositories\ObjectRepository;
-use Dictionary\Language\Transformers\LanguageTransformer;
+use Aleksa\Library\Repositories\ObjectRepository;
+use Aleksa\Language\Transformers\LanguageTransformer;
 
 class LanguageRepository extends ObjectRepository
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dictionary\Dictionary\Models;
+namespace Aleksa\Dictionary\Models;
 
 class Dictionary
 {

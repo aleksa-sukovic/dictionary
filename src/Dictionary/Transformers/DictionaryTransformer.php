@@ -1,9 +1,9 @@
 <?php
 
-namespace Dictionary\Dictionary\Transformers;
+namespace Aleksa\Dictionary\Transformers;
 
-use Dictionary\Dictionary\Models\Dictionary;
-use Dictionary\Library\Transformers\ObjectTransformer;
+use Aleksa\Dictionary\Models\Dictionary;
+use Aleksa\Library\Transformers\ObjectTransformer;
 
 class DictionaryTransformer extends ObjectTransformer
 {
