@@ -24,15 +24,15 @@ INSERT INTO dictionaries(id, name, language_id) VALUES
 
 # Word Types
 INSERT INTO word_types (id, name, label) VALUES
-    (1, 'imenica', 'Imenica'),
-    (2, 'pridjev', 'Pridjev'),
-    (3, 'glagol', 'Glagol'),
-    (4, 'zamjenica', 'Zamjenica'),
-    (5, 'brojevi', 'Brojevi'),
-    (6, 'prilozi', 'Prilozi'),
-    (7, 'prijedlozi', 'Prijedlozi'),
-    (8, 'veznici', 'Veznici'),
-    (9, 'uzvici', 'Uzvici');
+    (1, 'Imenica'),
+    (2, 'Pridjev'),
+    (3, 'Glagol'),
+    (4, 'Zamjenica'),
+    (5, 'Brojevi'),
+    (6, 'Prilozi'),
+    (7, 'Prijedlozi'),
+    (8, 'Veznici'),
+    (9, 'Uzvici');
 
 # Words
 INSERT INTO words (id, slug, value, type_id) VALUES

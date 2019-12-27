@@ -25,6 +25,30 @@
         </li>
 
         <li class="nav-item">
+            <a href="../word-types.php" class="nav-link <?php
+            if (isPageActive(['word-types.php', 'word-types-edit.php'])) {
+                echo 'active';
+            }
+            ?>">Word types</a>
+        </li>
+
+        <li class="nav-item">
+            <a href="../word-form-types.php" class="nav-link <?php
+            if (isPageActive(['word-form-types.php', 'word-form-types-edit.php'])) {
+                echo 'active';
+            }
+            ?>">Word form types</a>
+        </li>
+
+        <li class="nav-item">
+            <a href="../word-form-states.php" class="nav-link <?php
+            if (isPageActive(['word-form-states.php', 'word-form-states-edit.php'])) {
+                echo 'active';
+            }
+            ?>">Word form states</a>
+        </li>
+
+        <li class="nav-item">
             <a href="../languages.php" class="nav-link <?php
             if (isPageActive(['languages.php', 'languages-edit.php'])) {
                 echo 'active';

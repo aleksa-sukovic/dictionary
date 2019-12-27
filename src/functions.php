@@ -2,6 +2,7 @@
 
 use Aleksa\Language\Repositories\LanguageRepository;
 use Aleksa\Library\DB\DBConnection;
+use Aleksa\WordType\Repositories\WordTypeRepository;
 
 function redirect($location)
 {
@@ -13,6 +14,11 @@ function redirect($location)
 function languages()
 {
     return new LanguageRepository(DBConnection::getConnection());
+}
+
+function wordTypes()
+{
+    return new WordTypeRepository(DBConnection::getConnection());
 }
 
 function isPageActive($pages)

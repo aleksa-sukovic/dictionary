@@ -23,7 +23,6 @@ CREATE TABLE dictionaries (
 
 CREATE TABLE word_types (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
     label VARCHAR(255) NOT NULL
 );
 

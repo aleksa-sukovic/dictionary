@@ -17,3 +17,7 @@ require_once './Dictionary/Transformers/DictionaryTransformer.php';
 require_once './Language/Models/Language.php';
 require_once './Language/Repositories/LanguageRepository.php';
 require_once './Language/Transformers/LanguageTransformer.php';
+
+require_once './WordType/Models/WordType.php';
+require_once './WordType/Repositories/WordTypeRepository.php';
+require_once './WordType/Transformers/WordTypeTransformer.php';
