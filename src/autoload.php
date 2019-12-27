@@ -21,3 +21,7 @@ require_once './Language/Transformers/LanguageTransformer.php';
 require_once './WordType/Models/WordType.php';
 require_once './WordType/Repositories/WordTypeRepository.php';
 require_once './WordType/Transformers/WordTypeTransformer.php';
+
+require_once './WordFormType/Models/WordFormType.php';
+require_once './WordFormType/Repositories/WordFormTypeRepository.php';
+require_once './WordFormType/Transformers/WordFormTypeTransformer.php';

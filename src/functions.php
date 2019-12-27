@@ -3,6 +3,7 @@
 use Aleksa\Dictionary\Repositories\DictionaryRepository;
 use Aleksa\Language\Repositories\LanguageRepository;
 use Aleksa\Library\DB\DBConnection;
+use Aleksa\WordFormType\Repositories\WordFormTypeRepository;
 use Aleksa\WordType\Repositories\WordTypeRepository;
 
 function redirect($location)
@@ -25,6 +26,11 @@ function wordTypes()
 function dictionaries()
 {
     return new DictionaryRepository(DBConnection::getConnection());
+}
+
+function wordFormTypes()
+{
+    return new WordFormTypeRepository(DBConnection::getConnection());
 }
 
 function isPageActive($pages)
