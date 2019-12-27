@@ -17,22 +17,21 @@
     <!-- Custom styles -->
     <link rel="stylesheet" href="assets/css/app.css">
 
-    <title>Dictionary</title>
+    <title>Dictionaries</title>
 </head>
 <body>
-    <!-- Header -->
-    <?php require_once './Partials/header.php'; ?>
+<!-- Header -->
+<?php require_once './Partials/header.php'; ?>
 
-    <div class="container-fluid body-content p-0 m-0">
-        <!-- Navigation -->
-        <?php require_once './Partials/navigation.php'; ?>
+<div class="container-fluid body-content p-0 m-0">
+    <!-- Navigation -->
+    <?php require_once './Partials/navigation.php'; ?>
 
-        <!-- Main content -->
-        <div class="container-fluid">
-            <h1 class="h4 text-center mt-4">Dictionary project</h1>
-
-            <p class="lead text-center">Manage translations in multiple languages</p>
-        </div>
+    <!-- Main content -->
+    <div class="container-fluid p-3">
+        <h1>Dictionaries</h1>
     </div>
+</div>
 </body>
 </html>
+

@@ -14,3 +14,8 @@ function languages()
 {
     return new LanguageRepository(DBConnection::getConnection());
 }
+
+function isPageActive($page)
+{
+    return basename($_SERVER['PHP_SELF']) === $page;
+}
