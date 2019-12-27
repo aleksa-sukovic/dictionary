@@ -100,7 +100,7 @@ class ObjectRepository
             throw new ItemNotSavedException();
         }
 
-        return $this->findById($params[$this->primaryKey]);
+        return $this->findById($data[$this->primaryKey]);
     }
 
     public function destroy($id)
