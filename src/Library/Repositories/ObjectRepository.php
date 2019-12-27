@@ -31,6 +31,11 @@ class ObjectRepository
     public function all()
     {
         $result = $this->connection->query("SELECT * FROM $this->tableName");
+
+        if (!$result) {
+            return [];
+        }
+
         $transformed = $this->transformer->toObjectArray($result);
 
         mysqli_free_result($result);
