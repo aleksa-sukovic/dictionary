@@ -3,86 +3,89 @@ CREATE DATABASE dictionary;
 USE dictionary;
 
 CREATE TABLE languages (
-	code VARCHAR(10) PRIMARY KEY,
-	label VARCHAR(255) NOT NULL
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(10),
+    label VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE dictionaries (
-	id INT AUTO_INCREMENT PRIMARY KEY,
-	name VARCHAR(255) NOT NULL,
-	description TEXT NULL,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NULL,
 
-	language_code VARCHAR(10) NULL,
-	
-	CONSTRAINT FK_DICTIONARIES_LANGUAGE FOREIGN KEY (language_code)
-		REFERENCES languages(code)
-		ON DELETE SET NULL
-		ON UPDATE CASCADE
+    language_id INT NULL,
+
+    CONSTRAINT FK_DICTIONARIES_LANGUAGE FOREIGN KEY (language_id)
+        REFERENCES languages(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE word_types (
-	name VARCHAR(255) PRIMARY KEY,
-	label VARCHAR(255) NOT NULL
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    label VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE words (
-	slug VARCHAR(255) PRIMARY KEY,
-	value VARCHAR(255) NOT NULL,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    slug VARCHAR(255),
+    value VARCHAR(255) NOT NULL,
 
-	type_name VARCHAR(255),
+    type_id INT,
 
-	CONSTRAINT FK_WORDS_TYPES FOREIGN KEY (type_name)
-		REFERENCES word_types(name)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE
+    CONSTRAINT FK_WORDS_TYPES FOREIGN KEY (type_id)
+        REFERENCES word_types(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE word_translations (
-	value VARCHAR(255) NOT NULL,
+    value VARCHAR(255) NOT NULL,
 
-	word_slug VARCHAR(255) NOT NULL,
-	language_code VARCHAR(10) NOT NULL,
+    word_id INT NOT NULL,
+    language_id INT NOT NULL,
 
-	PRIMARY KEY (word_slug, language_code),
-	CONSTRAINT FK_WORD_TRANSLATIONS_WORD FOREIGN KEY (word_slug)
-		REFERENCES words(slug)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE,
-	CONSTRAINT FK_WORD_TRANSLATIONS_LANGUAGE FOREIGN KEY (language_code)
-		REFERENCES languages(code)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE
+    PRIMARY KEY (word_id, language_id),
+    CONSTRAINT FK_WORD_TRANSLATIONS_WORD FOREIGN KEY (word_id)
+        REFERENCES words(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    CONSTRAINT FK_WORD_TRANSLATIONS_LANGUAGE FOREIGN KEY (language_id)
+        REFERENCES languages(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE word_form_types (
-	id INT AUTO_INCREMENT PRIMARY KEY,
-	value VARCHAR(255) NOT NULL
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    value VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE word_form_states (
-	id INT AUTO_INCREMENT PRIMARY KEY,
-	value VARCHAR(255) NOT NULL
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    value VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE word_forms (
-	id INT AUTO_INCREMENT PRIMARY KEY,
-	value VARCHAR(255),
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    value VARCHAR(255),
 
-	type_id INT NULL,
-	state_id INT NULL,
-	word_slug VARCHAR(255) NOT NULL,
-	language_code VARCHAR(255) NOT NULL,
+    type_id INT NULL,
+    state_id INT NULL,
+    word_id INT NOT NULL,
+    language_id INT NOT NULL,
 
-	CONSTRAINT FK_WORD_FORMS_TYPE FOREIGN KEY (type_id)
-		REFERENCES word_form_types(id)
-		ON DELETE SET NULL
-		ON UPDATE CASCADE,
-	CONSTRAINT FK_WORD_FORMS_STATES FOREIGN KEY (state_id)
-		REFERENCES word_form_states(id)
-		ON DELETE SET NULL
-		ON UPDATE CASCADE,
-	CONSTRAINT FK_WORD_FORMS_WORD_TRANSLATION FOREIGN KEY (word_slug, language_code)
-		REFERENCES word_translations(word_slug, language_code)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE
+    CONSTRAINT FK_WORD_FORMS_TYPE FOREIGN KEY (type_id)
+        REFERENCES word_form_types(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE,
+    CONSTRAINT FK_WORD_FORMS_STATES FOREIGN KEY (state_id)
+        REFERENCES word_form_states(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE,
+    CONSTRAINT FK_WORD_FORMS_WORD_TRANSLATION FOREIGN KEY (word_id, language_id)
+        REFERENCES word_translations(word_id, language_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );

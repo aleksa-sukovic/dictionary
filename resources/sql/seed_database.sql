@@ -13,53 +13,53 @@ TRUNCATE word_forms;
 SET FOREIGN_KEY_CHECKS = 1;
 
 # Languages
-INSERT INTO languages(code, label) VALUES
-    ('en', 'Engleski'),
-    ('de', 'Njemacki');
+INSERT INTO languages(id, code, label) VALUES
+    (1, 'en', 'Engleski'),
+    (2, 'de', 'Njemacki');
 
 # Dictionaries
-INSERT INTO dictionaries(name, language_code) VALUES
-    ('Srpsko-engleski', 'en'),
-    ('Srpsko-njemacki', 'de');
+INSERT INTO dictionaries(id, name, language_id) VALUES
+    (1, 'Srpsko-engleski', 1),
+    (2, 'Srpsko-njemacki', 2);
 
 # Word Types
-INSERT INTO word_types (name, label) VALUES
-    ('imenica', 'Imenica'),
-    ('pridjev', 'Pridjev'),
-    ('glagol', 'Glagol'),
-    ('zamjenica', 'Zamjenica'),
-    ('brojevi', 'Brojevi'),
-    ('prilozi', 'Prilozi'),
-    ('prijedlozi', 'Prijedlozi'),
-    ('veznici', 'Veznici'),
-    ('uzvici', 'Uzvici');
+INSERT INTO word_types (id, name, label) VALUES
+    (1, 'imenica', 'Imenica'),
+    (2, 'pridjev', 'Pridjev'),
+    (3, 'glagol', 'Glagol'),
+    (4, 'zamjenica', 'Zamjenica'),
+    (5, 'brojevi', 'Brojevi'),
+    (6, 'prilozi', 'Prilozi'),
+    (7, 'prijedlozi', 'Prijedlozi'),
+    (8, 'veznici', 'Veznici'),
+    (9, 'uzvici', 'Uzvici');
 
 # Words
-INSERT INTO words (slug, value, type_name) VALUES
-    ('kuca', 'Kuca', 'imenica'),
-    ('stolica', 'Stolica', 'imenica'),
-    ('nebo', 'Nebo', 'imenica'),
-    ('jak', 'Jak', 'pridjev'),
-    ('visok', 'Visok', 'pridjev'),
-    ('biti', 'Biti', 'glagol'),
-    ('raditi', 'Raditi', 'glagol');
+INSERT INTO words (id, slug, value, type_id) VALUES
+    (1, 'kuca', 'Kuca', 1),
+    (2, 'stolica', 'Stolica', 1),
+    (3, 'nebo', 'Nebo', 1),
+    (4, 'jak', 'Jak', 2),
+    (5, 'visok', 'Visok', 2),
+    (6, 'biti', 'Biti', 3),
+    (7, 'raditi', 'Raditi', 3);
 
 # Word Translations
-INSERT INTO word_translations (word_slug, language_code, value) VALUES
-    ('kuca', 'en', 'House'),
-    ('stolica', 'en', 'Chair'),
-    ('nebo', 'en', 'Sky'),
-    ('jak', 'en', 'Strong'),
-    ('visok', 'en', 'Tall'),
-    ('biti', 'en', 'To be'),
-    ('raditi', 'en', 'Work');
+INSERT INTO word_translations (word_id, language_id, value) VALUES
+    (1, 1, 'House'),
+    (2, 1, 'Chair'),
+    (3, 1, 'Sky'),
+    (4, 1, 'Strong'),
+    (5, 1, 'Tall'),
+    (6, 1, 'To be'),
+    (7, 1, 'Work');
 
 # Word form types
-INSERT INTO word_form_types (value) VALUES 
+INSERT INTO word_form_types (value) VALUES
     ('Prezent'),
     ('Perfekat'),
     ('Futur');
- 
+
 # Word form states
 INSERT INTO word_form_states (value) VALUES
     ('Prvo lice jednine'),
@@ -70,24 +70,24 @@ INSERT INTO word_form_states (value) VALUES
     ('Trece lice mnozine');
 
 # Word forms
-INSERT INTO word_forms (type_id, state_id, word_slug, language_code, value) VALUES
-    (1, 1, 'biti', 'en', 'I am'),
-    (1, 2, 'biti', 'en', 'You are'),
-    (1, 3, 'biti', 'en', 'He/She/It is'),
-    (1, 4, 'biti', 'en', 'We are'),
-    (1, 5, 'biti', 'en', 'You are'),
-    (1, 6, 'biti', 'en', 'They are'),
+INSERT INTO word_forms (type_id, state_id, word_id, language_id, value) VALUES
+    (1, 1, 6, 1, 'I am'),
+    (1, 2, 6, 1, 'You are'),
+    (1, 3, 6, 1, 'He/She/It is'),
+    (1, 4, 6, 1, 'We are'),
+    (1, 5, 6, 1, 'You are'),
+    (1, 6, 6, 1, 'They are'),
 
-    (2, 1, 'biti', 'en', 'I was'),
-    (2, 2, 'biti', 'en', 'You were'),
-    (2, 3, 'biti', 'en', 'He/She/It was'),
-    (2, 4, 'biti', 'en', 'We were'),
-    (2, 5, 'biti', 'en', 'You were'),
-    (2, 6, 'biti', 'en', 'They were'),
+    (2, 1, 6, 1, 'I was'),
+    (2, 2, 6, 1, 'You were'),
+    (2, 3, 6, 1, 'He/She/It was'),
+    (2, 4, 6, 1, 'We were'),
+    (2, 5, 6, 1, 'You were'),
+    (2, 6, 6, 1, 'They were'),
 
-    (3, 1, 'biti', 'en', 'I will'),
-    (3, 2, 'biti', 'en', 'You will'),
-    (3, 3, 'biti', 'en', 'He/She/It will'),
-    (3, 4, 'biti', 'en', 'We will'),
-    (3, 5, 'biti', 'en', 'You will'),
-    (3, 6, 'biti', 'en', 'They will');
+    (3, 1, 6, 1, 'I will'),
+    (3, 2, 6, 1, 'You will'),
+    (3, 3, 6, 1, 'He/She/It will'),
+    (3, 4, 6, 1, 'We will'),
+    (3, 5, 6, 1, 'You will'),
+    (3, 6, 6, 1, 'They will');

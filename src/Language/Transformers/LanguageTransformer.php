@@ -8,6 +8,7 @@ use Aleksa\Library\Transformers\ObjectTransformer;
 class LanguageTransformer extends ObjectTransformer
 {
     protected $fields = [
+        'id' => 'int',
         'code' => 'string',
         'label' => 'string',
     ];
@@ -15,7 +16,8 @@ class LanguageTransformer extends ObjectTransformer
     public function toObject($array)
     {
         return new Language(
-            $array['code'] ?? 0,
+            $array['id'] ?? 0,
+            $array['code'] ?? '',
             $array['label'] ?? ''
         );
     }

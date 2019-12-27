@@ -9,7 +9,7 @@ use Aleksa\Language\Transformers\LanguageTransformer;
 class LanguageRepository extends ObjectRepository
 {
     protected $tableName  = 'languages';
-    protected $primaryKey = 'code';
+    protected $primaryKey = 'id';
 
     public function __construct(MySQL $connection)
     {

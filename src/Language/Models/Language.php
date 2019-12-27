@@ -4,11 +4,13 @@ namespace Aleksa\Language\Models;
 
 class Language
 {
+    public $id;
     public $code;
     public $label;
 
-    public function __construct($code, $label)
+    public function __construct($id, $code, $label)
     {
+        $this->id = $id;
         $this->code = $code;
         $this->label = $label;
     }
