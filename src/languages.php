@@ -1,4 +1,8 @@
-<?php require_once './autoload.php'; ?>
+<?php
+    require_once './autoload.php';
+
+    $languages = languages()->all();
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -28,8 +32,36 @@
     <?php require_once './Partials/navigation.php'; ?>
 
     <!-- Main content -->
-    <div class="container-fluid p-3">
-        <h1>Languages</h1>
+    <div class="p-4">
+        <div class="text-right">
+            <a class="btn btn-outline-primary mb-4" role="button" href="languages-edit.php">Add new</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-sm">
+               <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Label</th>
+                    <th>Code</th>
+                    <th>Actions</th>
+                </tr>
+               </thead>
+
+                <tbody>
+                    <?php foreach ($languages as $language) { ?>
+                        <tr>
+                            <td><?php echo $language->id; ?></td>
+                            <td><?php echo $language->label; ?></td>
+                            <td><?php echo $language->code; ?></td>
+                            <td>
+                                <a href="languages-edit.php?language=<?php echo $language->id ?>" class="text-info mr-2">Edit</a>
+                                <a href="languages-delete.php?language=<?php echo $language->id ?>" class="text-danger mr-2">Delete</a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 </body>

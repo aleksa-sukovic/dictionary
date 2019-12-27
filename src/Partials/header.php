@@ -1,5 +1,5 @@
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-3 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Dictionary</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="../index.php">Dictionary</a>
 
     <form class="w-100 form-inline" action="">
         <!-- Search query -->
