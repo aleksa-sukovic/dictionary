@@ -10,7 +10,7 @@ class DictionaryTransformer extends ObjectTransformer
     protected $fields = [
         'id'            => 'int',
         'name'          => 'string',
-        'language_code' => 'string',
+        'language_id'   => 'int',
         'description'   => 'string:nullable',
     ];
 
@@ -18,7 +18,7 @@ class DictionaryTransformer extends ObjectTransformer
     {
         return new Dictionary(
             $array['id'] ?? 0,
-            $array['language_code'] ?? '',
+            $array['language_id'] ?? '',
             $array['name'] ?? '',
             $array['description'] ?? ''
         );

@@ -10,7 +10,7 @@
 
         <li class="nav-item">
             <a href="../dictionaries.php" class="nav-link <?php
-                if (isPageActive(['dictionaries.php'])) {
+                if (isPageActive(['dictionaries.php', 'dictionaries-edit.php'])) {
                     echo 'active';
                 }
                 ?>">Dictionaries</a>

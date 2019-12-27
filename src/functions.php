@@ -1,5 +1,6 @@
 <?php
 
+use Aleksa\Dictionary\Repositories\DictionaryRepository;
 use Aleksa\Language\Repositories\LanguageRepository;
 use Aleksa\Library\DB\DBConnection;
 use Aleksa\WordType\Repositories\WordTypeRepository;
@@ -19,6 +20,11 @@ function languages()
 function wordTypes()
 {
     return new WordTypeRepository(DBConnection::getConnection());
+}
+
+function dictionaries()
+{
+    return new DictionaryRepository(DBConnection::getConnection());
 }
 
 function isPageActive($pages)

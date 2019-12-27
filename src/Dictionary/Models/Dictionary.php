@@ -5,18 +5,28 @@ namespace Aleksa\Dictionary\Models;
 class Dictionary
 {
     public $id;
-    public $languageCode;
+    public $languageId;
+    public $language;
     public $name;
     public $description;
 
-    public function __construct($id, $languageCode, $name, $description = null)
+    public function __construct($id, $languageId, $name, $description = null)
     {
         $this->id = $id;
-        $this->languageCode = $languageCode;
+        $this->languageId = $languageId;
         $this->name = $name;
         $this->description = $description;
     }
-    
+
+    public function language($refresh = false)
+    {
+        if ($this->languageId && (!$this->language || $refresh)) {
+            $this->language = languages()->findById($this->languageId);
+        }
+
+        return $this->language;
+    }
+
     public function __toString()
     {
         return $this->name;
@@ -26,7 +36,7 @@ class Dictionary
     {
         return [
             'id' => $this->id,
-            'language_code' => $this->languageCode,
+            'language_id' => $this->languageId,
             'name' => $this->name,
             'description' => $this->description,
         ];
