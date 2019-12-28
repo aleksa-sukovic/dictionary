@@ -1,14 +1,9 @@
 <?php
     require_once '../../autoload.php';
 
-    // Handle errors
-    session_start();
-    $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
-    $_SESSION['errors'] = [];
-    session_write_close();
-
+    $errors     = fetchErrors();
     $activeItem = isset($_GET['item']) ? dictionaries()->findById($_GET['item']) : null;
-    $languages = languages()->all();
+    $languages  = languages()->all();
 ?>
 <!doctype html>
 <html lang="en">
@@ -47,13 +42,16 @@
             </div>
         </div>
 
+        <!-- Errors -->
+        <?php if (count($errors)) { ?>
         <div class="row mt-2">
             <div class="col-sm-6 offset-3">
                 <?php foreach ($errors as $error => $message) { ?>
-                    <p class="text-danger"><?php echo $message ?></p>
+                    <div class="alert alert-danger"><?php echo $message ?></div>
                 <?php } ?>
             </div>
         </div>
+        <?php } ?>
 
         <div class="row mt-2">
             <div class="col-sm-6 offset-3">
@@ -68,18 +66,23 @@
                     <div class="form-group">
                         <label for="name">Name:</label>
 
-                        <input type="text" class="form-control" id="label" name="name" value="<?php
-                            if ($activeItem) {
-                                echo $activeItem->name;
-                            }
-                        ?>" >
+                        <input type="text"
+                               class="form-control"
+                               id="name"
+                               name="name"
+                               value="<?php if ($activeItem) echo $activeItem->name ?>">
                     </div>
 
                     <!-- Description -->
                     <div class="form-group">
                         <label for="description">Description:</label>
 
-                        <textarea type="text" cols="5" rows="10" class="form-control" id="description" name="description"><?php if ($activeItem) echo $activeItem->description ?></textarea>
+                        <textarea type="text"
+                                  cols="5"
+                                  rows="10"
+                                  class="form-control"
+                                  id="description"
+                                  name="description"><?php if ($activeItem) echo $activeItem->description ?></textarea>
                     </div>
 
                    <!-- Language -->
@@ -88,15 +91,12 @@
 
                         <select name="language_id" id="language">
                             <?php foreach ($languages as $language) { ?>
-                                <option value="<?php echo $language->id ?>" <?php
-                                    if ($activeItem && $activeItem->languageId == $language->id) {
-                                        echo 'selected';
-                                    }
-                                 ?>><?php echo $language->label ?></option>
+                                <option value="<?php echo $language->id ?>" <?php if ($activeItem && $activeItem->languageId == $language->id) echo 'selected' ?>>
+                                    <?php echo $language->label ?>
+                                </option>
                             <?php } ?>
                         </select>
                     </div>
-
 
                     <!-- Submit -->
                     <button type="submit" class="btn btn-primary mb-2">

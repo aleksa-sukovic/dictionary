@@ -3,6 +3,7 @@
 use Aleksa\Dictionary\Repositories\DictionaryRepository;
 use Aleksa\Language\Repositories\LanguageRepository;
 use Aleksa\Library\DB\DBConnection;
+use Aleksa\Library\Validators\RequestValidator;
 use Aleksa\Word\Repositories\WordRepository;
 use Aleksa\WordFormState\Repositories\WordFormStateRepository;
 use Aleksa\WordFormType\Repositories\WordFormTypeRepository;
@@ -14,6 +15,22 @@ function redirect($location)
     header('Location: ' . $location);
 
     exit;
+}
+
+function fetchErrors()
+{
+    session_start();
+    $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
+
+    $_SESSION['errors'] = [];
+    session_write_close();
+
+    return $errors;
+}
+
+function requestValidator()
+{
+    return new RequestValidator();
 }
 
 function languages()

@@ -7,6 +7,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Library/Transformers/ObjectTransforme
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Library/Exceptions/ItemNotFoundException.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Library/Exceptions/ItemNotSavedException.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Library/Exceptions/ItemNotDeletedException.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Library/Exceptions/ValidationException.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Library/Validators/RequestValidator.php';
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/functions.php';
 
