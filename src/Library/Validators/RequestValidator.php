@@ -11,9 +11,15 @@ class RequestValidator
         session_start();
         $errors = [];
 
-        foreach ($rules as $rule => $message) {
-            if (!array_key_exists($rule, $params) || !$params[$rule]) {
-                $errors[$rule] = $message;
+        foreach ($rules as $rule => $data) {
+            if (is_callable($data)) {
+                $result = call_user_func($data, $params);
+
+                if ($result) {
+                    $errors[$rule] = call_user_func($data, $params);
+                }
+            } else if (!array_key_exists($rule, $params) || !$params[$rule]) {
+                $errors[$rule] = $data;
             }
         }
 
