@@ -89,7 +89,7 @@
                     <div class="form-group">
                         <label for="language">Language:</label>
 
-                        <select name="language_id" id="language">
+                        <select class="custom-select" name="language_id" id="language">
                             <?php foreach ($languages as $language) { ?>
                                 <option value="<?php echo $language->id ?>" <?php if ($activeItem && $activeItem->languageId == $language->id) echo 'selected' ?>>
                                     <?php echo $language->label ?>
