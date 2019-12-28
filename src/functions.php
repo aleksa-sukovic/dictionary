@@ -5,6 +5,7 @@ use Aleksa\Language\Repositories\LanguageRepository;
 use Aleksa\Library\DB\DBConnection;
 use Aleksa\Library\Validators\RequestValidator;
 use Aleksa\Word\Repositories\WordRepository;
+use Aleksa\WordForm\Repositories\WordFormRepository;
 use Aleksa\WordFormState\Repositories\WordFormStateRepository;
 use Aleksa\WordFormType\Repositories\WordFormTypeRepository;
 use Aleksa\WordTranslation\Repositories\WordTranslationRepository;
@@ -71,6 +72,11 @@ function words()
 function wordTranslations()
 {
     return new WordTranslationRepository(DBConnection::getConnection());
+}
+
+function wordForms()
+{
+    return new WordFormRepository(DBConnection::getConnection());
 }
 
 function isPageActive($pages)

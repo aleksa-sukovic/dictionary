@@ -11,6 +11,7 @@ class WordTranslation
 
     public $word;
     public $language;
+    public $forms;
 
     public function __construct($id, $value, $wordId, $languageId)
     {
@@ -36,6 +37,15 @@ class WordTranslation
         }
 
         return $this->language;
+    }
+
+    public function forms($refresh = false)
+    {
+        if (!$this->forms || $refresh) {
+            $this->forms = wordForms()->forTranslation($this->id);
+        }
+
+        return $this->forms;
     }
 
     public function __toString()

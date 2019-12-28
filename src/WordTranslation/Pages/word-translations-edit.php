@@ -61,9 +61,11 @@
             </div>
         <?php } ?>
 
+        <!-- Input form -->
         <div class="row mt-2">
             <div class="col-sm-6 offset-3">
                 <form action="word-translations-processors.php" method="POST">
+                    <p class="lead">Base word</p>
 
                     <!-- ID -->
                     <?php if ($activeItem) { ?>
@@ -103,10 +105,32 @@
                     </div>
 
                     <!-- Submit -->
-                    <button type="submit" class="btn btn-primary mb-2">
+                    <button type="submit" class="btn btn-primary">
                         <?php if ($activeItem) echo 'Update'; else echo 'Create'; ?>
                     </button>
                 </form>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-sm-6 offset-3">
+                <!-- Word forms -->
+                <div class="d-flex flex-row justify-content-between mt-5">
+                    <p class="lead">Forms</p>
+                    <a href="/WordForm/Pages/word-forms-edit.php?translation=<?php echo $activeItem->id ?>" class="text-info font-weight-lighter">
+                        Add form
+                    </a>
+                </div>
+
+                <!-- Unsaved translation warning -->
+                <?php if (!$activeItem) { ?>
+                    <p class="alert alert-warning">
+                        Save the word in order to add its forms.
+                    </p>
+                <?php } ?>
+
+                <!-- Forms -->
+                <?php if ($activeItem) require_once fullPath('WordForm/Pages/word-forms.php') ?>
             </div>
         </div>
     </div>

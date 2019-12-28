@@ -39,3 +39,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Word/Transformers/WordTransformer.php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/WordTranslation/Models/WordTranslation.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/WordTranslation/Repositories/WordTranslationRepository.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/WordTranslation/Transformers/WordTranslationTransformer.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/WordForm/Models/WordForm.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/WordForm/Repositories/WordFormRepository.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/WordForm/Transformers/WordFormTransformer.php';

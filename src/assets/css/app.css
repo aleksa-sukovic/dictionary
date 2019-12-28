@@ -1,6 +1,6 @@
 .body-content {
-    position: fixed !important;
-    top: 72px !important;
+    margin-top: 72px !important;
+    overflow-x: hidden;
 }
 
 .active {

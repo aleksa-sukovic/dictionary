@@ -1,9 +1,18 @@
 <?php
     require_once '../../autoload.php';
 
-    $errors     = fetchErrors();
-    $activeItem = isset($_GET['item']) ? words()->findById($_GET['item']) : null;
-    $wordTypes  = wordTypes()->all();
+    $errors = fetchErrors();
+    $activeItem = isset($_GET['item']) ? wordForms()->findById($_GET['item']) : null;
+    $wordTypes = wordFormTypes()->all();
+    $wordStates = wordFormStates()->all();
+
+    if (isset($_GET['item'])) {
+        $translation = $activeItem->translation();
+    } else if (isset($_GET['translation'])) {
+        $translation = wordTranslations()->findById($_GET['translation']);
+    } else {
+        redirect('/WordForm/Pages/word-forms.php');
+    }
 ?>
 <!doctype html>
 <html lang="en">
@@ -20,7 +29,7 @@
     <!-- Custom styles -->
     <link rel="stylesheet" href="../../assets/css/app.css">
 
-    <title>Words</title>
+    <title>Word forms</title>
 </head>
 <body>
 <!-- Header -->
@@ -31,10 +40,10 @@
     <?php require_once '../../Partials/navigation.php'; ?>
 
     <!-- Main content -->
-    <div class="p-4">
+    <div class="p-4 container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="h4 text-center mt-2">Words</h1>
+                <h1 class="h4 text-center mt-2">Word form</h1>
 
                 <p class="lead text-center text-muted">
                     <?php if ($activeItem) echo 'Edit'; else echo 'Add new'; ?>
@@ -56,12 +65,10 @@
         <!-- Input form -->
         <div class="row mt-2">
             <div class="col-sm-6 offset-3">
-                <form action="/Word/Pages/words-processors.php" method="POST">
-                    <p class="lead">Base word</p>
-
-                    <!-- Language ID -->
+                <form action="/WordForm/Pages/word-forms-processor.php" method="POST">
+                    <!-- ID -->
                     <?php if ($activeItem) { ?>
-                    <input type="hidden" value="<?php echo $activeItem->id; ?>" name="id" id="id">
+                    <input type="hidden" name="id" value="<?php echo $activeItem->id ?>">
                     <?php } ?>
 
                     <!-- Value -->
@@ -75,29 +82,38 @@
                                value="<?php if ($activeItem) echo $activeItem->value ?>">
                     </div>
 
-                    <!-- Word type -->
+                    <!-- State -->
                     <div class="form-group">
-                        <label for="type">Word type:</label>
+                        <label for="state">State:</label>
 
-                        <select class="custom-select" name="type_id" id="type">
-                            <?php foreach ($wordTypes as $type) { ?>
-                                <option value="<?php echo $type->id ?>" <?php if ($activeItem && $activeItem->typeId == $type->id) echo 'selected' ?>>
-                                    <?php echo $type->label ?>
+                        <select class="custom-select" name="state_id" id="type">
+                            <?php foreach($wordStates as $state) { ?>
+                                <option value="<?php echo $state->id ?>" <?php if ($activeItem && $activeItem->stateId == $state->id) echo 'selected' ?>>
+                                    <?php echo $state->value ?>
                                 </option>
                             <?php } ?>
                         </select>
                     </div>
 
-                    <!-- Slug -->
+                    <!-- Type -->
                     <div class="form-group">
-                        <label for="slug">Slug:</label>
+                        <label for="type">Type:</label>
 
-                        <input type="text"
-                               class="form-control"
-                               id="slug"
-                               name="slug"
-                               disabled
-                               value="<?php if ($activeItem) echo $activeItem->slug ?>">
+                        <select class="custom-select" name="type_id" id="type">
+                            <?php foreach($wordTypes as $type) { ?>
+                            <option value="<?php echo $type->id ?>" <?php if ($activeItem && $activeItem->typeId == $type->id) echo 'selected' ?>>
+                                <?php echo $type->value ?>
+                            </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
+                    <!-- Translation -->
+                    <div class="form-group">
+                        <label for="translation">Word:</label>
+
+                        <input type="text" class="form-control" id="translation" disabled value="<?php echo $translation->value ?>">
+                        <input type="hidden" class="form-control" name="word_translation_id" value="<?php echo $translation->id ?>">
                     </div>
 
                     <!-- Submit -->
@@ -105,28 +121,6 @@
                         <?php if ($activeItem) echo 'Update'; else echo 'Create'; ?>
                     </button>
                 </form>
-            </div>
-        </div>
-
-        <div class="row mt-2">
-            <div class="col-sm-6 offset-3">
-                <!-- Translations -->
-                <div class="d-flex flex-row justify-content-between mt-5">
-                    <p class="lead">Translations</p>
-                    <a href="/WordTranslation/Pages/word-translations-edit.php?word=<?php echo $activeItem->id ?>" class="text-info font-weight-lighter">
-                        Add translation
-                    </a>
-                </div>
-
-                <!-- Unsaved word warning -->
-                <?php if (!$activeItem) { ?>
-                    <p class="alert alert-warning">
-                        Save the word in order to add its translations.
-                    </p>
-                <?php } ?>
-
-                <!-- Translations -->
-                <?php if ($activeItem) require_once fullPath('WordTranslation/Pages/word-translations.php') ?>
             </div>
         </div>
     </div>
