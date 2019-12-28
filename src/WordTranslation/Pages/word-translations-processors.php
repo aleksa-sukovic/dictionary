@@ -17,7 +17,7 @@ $validationParams = [
 
             wordTranslations()->find($params['word_id'], $params['language_id'], $params['id'] ?? null);
 
-            return "Translation in this language already exists.";
+            return "Translation for this language already exists.";
         } catch (ItemNotFoundException|Exception $e) {
             return null;
         }
