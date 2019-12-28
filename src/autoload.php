@@ -33,3 +33,7 @@ require_once './WordFormState/Transformers/WordFormStateTransformer.php';
 require_once './Word/Models/Word.php';
 require_once './Word/Repositories/WordRepository.php';
 require_once './Word/Transformers/WordTransformer.php';
+
+require_once './WordTranslation/Models/WordTranslation.php';
+require_once './WordTranslation/Repositories/WordTranslationRepository.php';
+require_once './WordTranslation/Transformers/WordTranslationTransformer.php';

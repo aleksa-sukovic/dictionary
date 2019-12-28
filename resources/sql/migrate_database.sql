@@ -40,12 +40,12 @@ CREATE TABLE words (
 );
 
 CREATE TABLE word_translations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     value VARCHAR(255) NOT NULL,
 
     word_id INT NOT NULL,
     language_id INT NOT NULL,
 
-    PRIMARY KEY (word_id, language_id),
     CONSTRAINT FK_WORD_TRANSLATIONS_WORD FOREIGN KEY (word_id)
         REFERENCES words(id)
         ON DELETE CASCADE
@@ -72,8 +72,7 @@ CREATE TABLE word_forms (
 
     type_id INT NULL,
     state_id INT NULL,
-    word_id INT NOT NULL,
-    language_id INT NOT NULL,
+    word_translation_id INT,
 
     CONSTRAINT FK_WORD_FORMS_TYPE FOREIGN KEY (type_id)
         REFERENCES word_form_types(id)
@@ -83,8 +82,8 @@ CREATE TABLE word_forms (
         REFERENCES word_form_states(id)
         ON DELETE SET NULL
         ON UPDATE CASCADE,
-    CONSTRAINT FK_WORD_FORMS_WORD_TRANSLATION FOREIGN KEY (word_id, language_id)
-        REFERENCES word_translations(word_id, language_id)
+    CONSTRAINT FK_WORD_FORMS_WORD_TRANSLATION FOREIGN KEY (word_translation_id)
+        REFERENCES word_translations(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );

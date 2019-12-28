@@ -109,6 +109,7 @@ class ObjectRepository
         $query = "DELETE FROM $this->tableName WHERE $this->primaryKey = $value";
 
         if (!$this->connection->query($query)) {
+            die($this->connection->error);
             throw new ItemNotDeletedException();
         }
 

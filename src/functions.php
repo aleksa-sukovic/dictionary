@@ -6,6 +6,7 @@ use Aleksa\Library\DB\DBConnection;
 use Aleksa\Word\Repositories\WordRepository;
 use Aleksa\WordFormState\Repositories\WordFormStateRepository;
 use Aleksa\WordFormType\Repositories\WordFormTypeRepository;
+use Aleksa\WordTranslation\Repositories\WordTranslationRepository;
 use Aleksa\WordType\Repositories\WordTypeRepository;
 
 function redirect($location)
@@ -43,6 +44,11 @@ function wordFormStates()
 function words()
 {
     return new WordRepository(DBConnection::getConnection());
+}
+
+function wordTranslations()
+{
+    return new WordTranslationRepository(DBConnection::getConnection());
 }
 
 function isPageActive($pages)

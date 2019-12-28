@@ -23,7 +23,7 @@ INSERT INTO dictionaries(id, name, language_id) VALUES
     (2, 'Srpsko-njemacki', 2);
 
 # Word Types
-INSERT INTO word_types (id, name, label) VALUES
+INSERT INTO word_types (id, label) VALUES
     (1, 'Imenica'),
     (2, 'Pridjev'),
     (3, 'Glagol'),
@@ -45,14 +45,14 @@ INSERT INTO words (id, slug, value, type_id) VALUES
     (7, 'raditi', 'Raditi', 3);
 
 # Word Translations
-INSERT INTO word_translations (word_id, language_id, value) VALUES
-    (1, 1, 'House'),
-    (2, 1, 'Chair'),
-    (3, 1, 'Sky'),
-    (4, 1, 'Strong'),
-    (5, 1, 'Tall'),
-    (6, 1, 'To be'),
-    (7, 1, 'Work');
+INSERT INTO word_translations (id, word_id, language_id, value) VALUES
+    (1, 1, 1, 'House'),
+    (2, 2, 1, 'Chair'),
+    (3, 3, 1, 'Sky'),
+    (4, 4, 1, 'Strong'),
+    (5, 5, 1, 'Tall'),
+    (6, 6, 1, 'To be'),
+    (7, 7, 1, 'Work');
 
 # Word form types
 INSERT INTO word_form_types (value) VALUES
@@ -70,24 +70,24 @@ INSERT INTO word_form_states (value) VALUES
     ('Trece lice mnozine');
 
 # Word forms
-INSERT INTO word_forms (type_id, state_id, word_id, language_id, value) VALUES
-    (1, 1, 6, 1, 'I am'),
-    (1, 2, 6, 1, 'You are'),
-    (1, 3, 6, 1, 'He/She/It is'),
-    (1, 4, 6, 1, 'We are'),
-    (1, 5, 6, 1, 'You are'),
-    (1, 6, 6, 1, 'They are'),
+INSERT INTO word_forms (type_id, state_id, word_translation_id, value) VALUES
+    (1, 1, 6, 'I am'),
+    (1, 2, 6, 'You are'),
+    (1, 3, 6, 'He/She/It is'),
+    (1, 4, 6, 'We are'),
+    (1, 5, 6, 'You are'),
+    (1, 6, 6, 'They are'),
 
-    (2, 1, 6, 1, 'I was'),
-    (2, 2, 6, 1, 'You were'),
-    (2, 3, 6, 1, 'He/She/It was'),
-    (2, 4, 6, 1, 'We were'),
-    (2, 5, 6, 1, 'You were'),
-    (2, 6, 6, 1, 'They were'),
+    (2, 1, 6, 'I was'),
+    (2, 2, 6, 'You were'),
+    (2, 3, 6, 'He/She/It was'),
+    (2, 4, 6, 'We were'),
+    (2, 5, 6, 'You were'),
+    (2, 6, 6, 'They were'),
 
-    (3, 1, 6, 1, 'I will'),
-    (3, 2, 6, 1, 'You will'),
-    (3, 3, 6, 1, 'He/She/It will'),
-    (3, 4, 6, 1, 'We will'),
-    (3, 5, 6, 1, 'You will'),
-    (3, 6, 6, 1, 'They will');
+    (3, 1, 6, 'I will'),
+    (3, 2, 6, 'You will'),
+    (3, 3, 6, 'He/She/It will'),
+    (3, 4, 6, 'We will'),
+    (3, 5, 6, 'You will'),
+    (3, 6, 6, 'They will');

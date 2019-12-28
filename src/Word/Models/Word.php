@@ -10,6 +10,8 @@ class Word
     public $typeId;
     public $type;
 
+    public $translations;
+
     public function __construct($id, $slug, $value, $typeId)
     {
         $this->id = $id;
@@ -30,6 +32,15 @@ class Word
     public function availableLanguages()
     {
         return words()->availableLanguages($this->id);
+    }
+
+    public function translations($refresh = false)
+    {
+        if (!$this->translations || $refresh) {
+            $this->translations = wordTranslations()->forWord($this->id);
+        }
+
+        return $this->translations;
     }
 
     public function __toString()

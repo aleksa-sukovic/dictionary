@@ -59,6 +59,8 @@
             <div class="col-sm-6 offset-3">
                 <form action="words-processors.php" method="POST">
 
+                    <p class="lead">Base word</p>
+
                     <!-- Language ID -->
                     <?php if ($activeItem) { ?>
                     <input type="hidden" value="<?php echo $activeItem->id; ?>" name="id" id="id">
@@ -99,6 +101,41 @@
                             <?php } ?>
                         </select>
                     </div>
+
+                    <!-- Translations -->
+                    <div class="d-flex flex-row justify-content-between mt-5">
+                        <p class="lead">Translations</p>
+                        <a href="./word-translations-edit.php?word=<?php echo $activeItem->id ?>" class="text-info font-weight-lighter">Add translation</a>
+                    </div>
+                     <?php if ($activeItem) { ?>
+                         <?php if (count($activeItem->translations())) { ?>
+                            <table class="table table-hover table-sm">
+                                <thead>
+                                    <tr>
+                                        <td>Value</td>
+                                        <td>Language</td>
+                                        <td>Actions</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($activeItem->translations() as $translation) { ?>
+                                    <tr>
+                                        <td><?php echo $translation->value ?></td>
+                                        <td><?php echo $translation->language()->label ?></td>
+                                        <td>
+                                            <a href="word-translations-edit.php?word=<?php echo $translation->wordId ?>&language=<?php echo $translation->languageId ?>" class="text-info mr-2">Edit</a>
+                                            <a href="word-translations-delete.php?word=<?php echo $translation->wordId ?>&item=<?php echo $translation->id ?>" class="text-danger mr-2">Delete</a>
+                                        </td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        <?php } else { ?>
+                             <p class="text-muted">There are currently no translations for this word.</p>
+                        <?php } ?>
+                    <?php } else { ?>
+                        <p class="text-muted">Save the word in order to add its translations.</p>
+                    <?php } ?>
 
                     <!-- Submit -->
                     <button type="submit" class="btn btn-primary mb-2">
