@@ -2,7 +2,7 @@
 
 use Aleksa\Library\Exceptions\ItemNotFoundException;
 
-require_once './autoload.php';
+require_once '../../autoload.php';
 
 session_start();
 $_SESSION['errors'] = [];
@@ -37,7 +37,7 @@ if (empty($_SESSION['errors'])) {
     $item = wordTranslations()->save($_POST);
 
     session_write_close();
-    redirect('../words-edit.php?item=' . $item->wordId);
+    redirect('../../Word/Pages/words-edit.php?item=' . $item->wordId);
 
     exit(0);
 }
@@ -46,8 +46,8 @@ if (empty($_SESSION['errors'])) {
 session_write_close();
 
 if (isset($_POST['word_id']) && isset($_POST['language_id'])) {
-    redirect('../word-translations-edit.php?word=' . $_POST['word_id'] . '&language=' . $_POST['language_id']);
+    redirect('./word-translations-edit.php?word=' . $_POST['word_id'] . '&language=' . $_POST['language_id']);
 } else {
-    redirect('../word-translations-edit.php');
+    redirect('./word-translations-edit.php');
 }
 

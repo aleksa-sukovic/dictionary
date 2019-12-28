@@ -1,5 +1,5 @@
 <?php
-    require_once './autoload.php';
+    require_once '../../autoload.php';
 
     // Handle errors
     session_start();
@@ -7,9 +7,8 @@
     $_SESSION['errors'] = [];
     session_write_close();
 
-    $activeItem = isset($_GET['word']) && isset($_GET['language']) ? wordTranslations()->find($_GET['word'], $_GET['language']) : null;
+    $activeItem = isset($_GET['item']) ? dictionaries()->findById($_GET['item']) : null;
     $languages = languages()->all();
-    $word = words()->findById($_GET['word']);
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,30 +16,30 @@
     <meta charset="UTF-8">
 
     <!-- Jquery -->
-    <script src="assets/js/jquery.min.js"></script>
+    <script src="../../assets/js/jquery.min.js"></script>
 
     <!-- Bootstrap -->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
 
     <!-- Custom styles -->
-    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="../../assets/css/app.css">
 
-    <title>Word translation</title>
+    <title>Dictionaries</title>
 </head>
 <body>
 <!-- Header -->
-<?php require_once './Partials/header.php'; ?>
+<?php require_once '../../Partials/header.php'; ?>
 
 <div class="container-fluid body-content p-0 m-0">
     <!-- Navigation -->
-    <?php require_once './Partials/navigation.php'; ?>
+    <?php require_once '../../Partials/navigation.php'; ?>
 
     <!-- Main content -->
     <div class="p-4">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="h4 text-center mt-2">Word translation</h1>
+                <h1 class="h4 text-center mt-2">Dictionaries</h1>
 
                 <p class="lead text-center text-muted">
                     <?php if ($activeItem) echo 'Edit'; else echo 'Add new'; ?>
@@ -58,46 +57,46 @@
 
         <div class="row mt-2">
             <div class="col-sm-6 offset-3">
-                <form action="word-translations-processors.php" method="POST">
+                <form action="dictionaries-processors.php" method="POST">
 
-                    <!-- ID -->
+                    <!-- Language ID -->
                     <?php if ($activeItem) { ?>
-                    <input type="hidden" name="id" value="<?php echo $activeItem->id ?>">
+                    <input type="hidden" value="<?php echo $activeItem->id; ?>" name="id" id="id">
                     <?php } ?>
 
-                    <!-- Value -->
+                    <!-- Name -->
                     <div class="form-group">
-                        <label for="value">Value:</label>
+                        <label for="name">Name:</label>
 
-                        <input type="text" class="form-control" id="value" name="value" value="<?php
+                        <input type="text" class="form-control" id="label" name="name" value="<?php
                             if ($activeItem) {
-                                echo $activeItem->value;
+                                echo $activeItem->name;
                             }
                         ?>" >
                     </div>
 
-                    <!-- Word -->
+                    <!-- Description -->
                     <div class="form-group">
-                        <label for="word">Word:</label>
+                        <label for="description">Description:</label>
 
-                        <input type="text" class="form-control" id="word" disabled value="<?php echo $word->value ?>">
-                        <input type="hidden" class="form-control" id="word" name="word_id" value="<?php echo $word->id ?>">
+                        <textarea type="text" cols="5" rows="10" class="form-control" id="description" name="description"><?php if ($activeItem) echo $activeItem->description ?></textarea>
                     </div>
 
-                    <!-- Language -->
+                   <!-- Language -->
                     <div class="form-group">
                         <label for="language">Language:</label>
 
-                        <select class="custom-select" name="language_id" id="language">
-                            <?php foreach($languages as $language) { ?>
+                        <select name="language_id" id="language">
+                            <?php foreach ($languages as $language) { ?>
                                 <option value="<?php echo $language->id ?>" <?php
                                     if ($activeItem && $activeItem->languageId == $language->id) {
                                         echo 'selected';
                                     }
-                                ?>><?php echo $language->label ?></option>
+                                 ?>><?php echo $language->label ?></option>
                             <?php } ?>
                         </select>
                     </div>
+
 
                     <!-- Submit -->
                     <button type="submit" class="btn btn-primary mb-2">

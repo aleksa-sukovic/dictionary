@@ -1,6 +1,6 @@
 <?php
 
-require_once './autoload.php';
+require_once '../../autoload.php';
 
 session_start();
 $_SESSION['errors'] = [];
@@ -20,7 +20,7 @@ if (empty($_SESSION['errors'])) {
     $language = languages()->save($_POST);
 
     session_write_close();
-    redirect('../languages-edit.php?language=' . $language->id);
+    redirect('./languages-edit.php?language=' . $language->id);
 
     exit(0);
 }
@@ -29,8 +29,8 @@ if (empty($_SESSION['errors'])) {
 session_write_close();
 
 if (isset($_POST['id'])) {
-    redirect('../languages-edit.php?language=' . $_POST['id']);
+    redirect('./languages-edit.php?language=' . $_POST['id']);
 } else {
-    redirect('../languages-edit.php');
+    redirect('./languages-edit.php');
 }
 

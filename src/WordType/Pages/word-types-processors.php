@@ -1,6 +1,6 @@
 <?php
 
-require_once './autoload.php';
+require_once '../../autoload.php';
 
 session_start();
 $_SESSION['errors'] = [];
@@ -15,7 +15,7 @@ if (empty($_SESSION['errors'])) {
     $language = wordTypes()->save($_POST);
 
     session_write_close();
-    redirect('../word-types-edit.php?item=' . $language->id);
+    redirect('./word-types-edit.php?item=' . $language->id);
 
     exit(0);
 }
@@ -24,8 +24,8 @@ if (empty($_SESSION['errors'])) {
 session_write_close();
 
 if (isset($_POST['id'])) {
-    redirect('../word-types-edit.php?item=' . $_POST['id']);
+    redirect('./word-types-edit.php?item=' . $_POST['id']);
 } else {
-    redirect('../word-types-edit.php');
+    redirect('./word-types-edit.php');
 }
 

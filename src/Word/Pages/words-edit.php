@@ -1,5 +1,5 @@
 <?php
-    require_once './autoload.php';
+    require_once '../../autoload.php';
 
     // Handle errors
     session_start();
@@ -16,14 +16,14 @@
     <meta charset="UTF-8">
 
     <!-- Jquery -->
-    <script src="assets/js/jquery.min.js"></script>
+    <script src="../../assets/js/jquery.min.js"></script>
 
     <!-- Bootstrap -->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
 
     <!-- Custom styles -->
-    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="../../assets/css/app.css">
 
     <title>Words</title>
 </head>
@@ -105,7 +105,7 @@
                     <!-- Translations -->
                     <div class="d-flex flex-row justify-content-between mt-5">
                         <p class="lead">Translations</p>
-                        <a href="./word-translations-edit.php?word=<?php echo $activeItem->id ?>" class="text-info font-weight-lighter">Add translation</a>
+                        <a href="../../WordTranslation/Pages/word-translations-edit.php?word=<?php echo $activeItem->id ?>" class="text-info font-weight-lighter">Add translation</a>
                     </div>
                      <?php if ($activeItem) { ?>
                          <?php if (count($activeItem->translations())) { ?>
@@ -123,8 +123,8 @@
                                         <td><?php echo $translation->value ?></td>
                                         <td><?php echo $translation->language()->label ?></td>
                                         <td>
-                                            <a href="word-translations-edit.php?word=<?php echo $translation->wordId ?>&language=<?php echo $translation->languageId ?>" class="text-info mr-2">Edit</a>
-                                            <a href="word-translations-delete.php?word=<?php echo $translation->wordId ?>&item=<?php echo $translation->id ?>" class="text-danger mr-2">Delete</a>
+                                            <a href="../../WordTranslation/Pages/word-translations-edit.php?word=<?php echo $translation->wordId ?>&language=<?php echo $translation->languageId ?>" class="text-info mr-2">Edit</a>
+                                            <a href="../../WordTranslation/Pages/word-translations-delete.php?word=<?php echo $translation->wordId ?>&item=<?php echo $translation->id ?>" class="text-danger mr-2">Delete</a>
                                         </td>
                                     </tr>
                                     <?php } ?>

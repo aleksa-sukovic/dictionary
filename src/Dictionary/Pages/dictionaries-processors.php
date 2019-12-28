@@ -1,6 +1,6 @@
 <?php
 
-require_once './autoload.php';
+require_once '../../autoload.php';
 
 session_start();
 $_SESSION['errors'] = [];
@@ -20,7 +20,7 @@ if (empty($_SESSION['errors'])) {
     $item = dictionaries()->save($_POST);
 
     session_write_close();
-    redirect('../dictionaries-edit.php?item=' . $item->id);
+    redirect('./dictionaries-edit.php?item=' . $item->id);
 
     exit(0);
 }
@@ -29,8 +29,8 @@ if (empty($_SESSION['errors'])) {
 session_write_close();
 
 if (isset($_POST['id'])) {
-    redirect('../dictionaries-edit.php?item=' . $_POST['id']);
+    redirect('./dictionaries-edit.php?item=' . $_POST['id']);
 } else {
-    redirect('../dictionaries-edit.php');
+    redirect('./dictionaries-edit.php');
 }
 
