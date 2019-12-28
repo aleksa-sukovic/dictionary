@@ -18,7 +18,7 @@
 
         <li class="nav-item">
             <a href="../words.php" class="nav-link <?php
-            if (isPageActive( ['words.php'])) {
+            if (isPageActive( ['words.php', 'words-edit.php'])) {
                 echo 'active';
             }
             ?>">Words</a>

@@ -29,3 +29,7 @@ require_once './WordFormType/Transformers/WordFormTypeTransformer.php';
 require_once './WordFormState/Models/WordFormState.php';
 require_once './WordFormState/Repositories/WordFormStateRepository.php';
 require_once './WordFormState/Transformers/WordFormStateTransformer.php';
+
+require_once './Word/Models/Word.php';
+require_once './Word/Repositories/WordRepository.php';
+require_once './Word/Transformers/WordTransformer.php';
