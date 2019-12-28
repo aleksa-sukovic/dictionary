@@ -23,7 +23,7 @@ class WordTranslation
     public function word($refresh = false)
     {
         if ($this->wordId && (!$this->word || $refresh)) {
-            $this->type = words()->findById($this->wordId);
+            $this->word = words()->findById($this->wordId);
         }
 
         return $this->word;

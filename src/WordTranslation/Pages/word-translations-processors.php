@@ -1,53 +1,40 @@
 <?php
 
 use Aleksa\Library\Exceptions\ItemNotFoundException;
+use Aleksa\Library\Exceptions\ValidationException;
 
 require_once '../../autoload.php';
 
-session_start();
-$_SESSION['errors'] = [];
+$validationParams = [
+    'value' => 'Value is required.',
+    'language_id' => 'Language is required.',
+    'word_id' => 'You must specify word.',
+    'unique' => function ($params) {
+        try {
+            if (!isset($params['word_id']) || !isset($params['language_id'])) {
+                throw new Exception();
+            }
 
-// Validate value
-if (empty($_POST['value'])) {
-    $_SESSION['errors']['label'] = 'Value is required.';
-}
+            wordTranslations()->find($params['word_id'], $params['language_id'], $params['id'] ?? null);
 
-// Validate language
-if (empty($_POST['language_id'])) {
-    $_SESSION['errors']['language_id'] = 'Language is required.';
-}
+            return "Translation in this language already exists.";
+        } catch (ItemNotFoundException|Exception $e) {
+            return null;
+        }
+    }
+];
 
-// Validate word
-if (empty($_POST['word_id'])) {
-    $_SESSION['errors']['word_id'] = 'Word is required.';
-}
+try {
+    requestValidator()->validateWithThrow($validationParams, $_POST);
 
-if (!empty($_POST['word_id']) && !empty($_POST['language_id'])) {
-    try {
-        $existing = wordTranslations()->find($_POST['word_id'], $_POST['language_id'], $_POST['id'] ?? null);
-
-        $_SESSION['errors']['duplicate'] = "Translation of word '" . words()->findById($_POST['word_id']) . "' for language '" . languages()->findById($_POST['language_id']) . "' already exists.";
-    } catch (ItemNotFoundException $e) {
-        //
+    $item = wordTranslations()->save($_POST);
+    redirect('../../Word/Pages/words-edit.php?item=' . $item->wordId);
+} catch (ValidationException $e) {
+    if (isset($_POST['id'])) {
+        redirect('./word-translations-edit.php?item=' . $_POST['id']);
+    } else if (isset($_POST['word_id'])) {
+        redirect('./word-translations-edit.php?word=' . $_POST['word_id']);
+    } else {
+        redirect('./word-translations-edit.php');
     }
 }
-
-// Handle no errors
-if (empty($_SESSION['errors'])) {
-    $item = wordTranslations()->save($_POST);
-
-    session_write_close();
-    redirect('../../Word/Pages/words-edit.php?item=' . $item->wordId);
-
-    exit(0);
-}
-
-// Handle errors
-session_write_close();
-
-if (isset($_POST['word_id']) && isset($_POST['language_id'])) {
-    redirect('./word-translations-edit.php?word=' . $_POST['word_id'] . '&language=' . $_POST['language_id']);
-} else {
-    redirect('./word-translations-edit.php');
-}
-

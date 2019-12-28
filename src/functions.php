@@ -28,6 +28,11 @@ function fetchErrors()
     return $errors;
 }
 
+function fullPath($path)
+{
+    return $_SERVER['DOCUMENT_ROOT'] . '/' . $path;
+}
+
 function requestValidator()
 {
     return new RequestValidator();

@@ -1,15 +1,17 @@
 <?php
     require_once '../../autoload.php';
 
-    // Handle errors
-    session_start();
-    $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
-    $_SESSION['errors'] = [];
-    session_write_close();
-
-    $activeItem = isset($_GET['word']) && isset($_GET['language']) ? wordTranslations()->find($_GET['word'], $_GET['language']) : null;
+    $errors = fetchErrors();
+    $activeItem = isset($_GET['item']) ? wordTranslations()->findById($_GET['item']) : null;
     $languages = languages()->all();
-    $word = words()->findById($_GET['word']);
+
+    if (isset($_GET['item'])) {
+        $word = $activeItem->word();
+    } else if (isset($_GET['word'])) {
+        $word = words()->findById($_GET['word']);
+    } else {
+        redirect('/Word/Pages/words.php');
+    }
 ?>
 <!doctype html>
 <html lang="en">
@@ -48,13 +50,16 @@
             </div>
         </div>
 
-        <div class="row mt-2">
-            <div class="col-sm-6 offset-3">
-                <?php foreach ($errors as $error => $message) { ?>
-                    <p class="text-danger"><?php echo $message ?></p>
-                <?php } ?>
+        <!-- Errors -->
+        <?php if (count($errors)) { ?>
+            <div class="row mt-2">
+                <div class="col-sm-6 offset-3">
+                    <?php foreach ($errors as $error => $message) { ?>
+                        <div class="alert alert-danger"><?php echo $message ?></div>
+                    <?php } ?>
+                </div>
             </div>
-        </div>
+        <?php } ?>
 
         <div class="row mt-2">
             <div class="col-sm-6 offset-3">
@@ -69,11 +74,11 @@
                     <div class="form-group">
                         <label for="value">Value:</label>
 
-                        <input type="text" class="form-control" id="value" name="value" value="<?php
-                            if ($activeItem) {
-                                echo $activeItem->value;
-                            }
-                        ?>" >
+                        <input type="text"
+                               class="form-control"
+                               id="value"
+                               name="value"
+                               value="<?php if ($activeItem) echo $activeItem->value ?>">
                     </div>
 
                     <!-- Word -->
@@ -90,11 +95,9 @@
 
                         <select class="custom-select" name="language_id" id="language">
                             <?php foreach($languages as $language) { ?>
-                                <option value="<?php echo $language->id ?>" <?php
-                                    if ($activeItem && $activeItem->languageId == $language->id) {
-                                        echo 'selected';
-                                    }
-                                ?>><?php echo $language->label ?></option>
+                            <option value="<?php echo $language->id ?>" <?php if ($activeItem && $activeItem->languageId == $language->id) echo 'selected' ?>>
+                                <?php echo $language->label ?>
+                            </option>
                             <?php } ?>
                         </select>
                     </div>

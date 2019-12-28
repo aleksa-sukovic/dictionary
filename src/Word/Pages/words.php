@@ -55,8 +55,8 @@ $items = words()->all();
                         <td><?php if ($item->type()) echo $item->type()->label; else echo '-'; ?></td>
                         <td><?php echo implode(',', $item->availableLanguages()) ?></td>
                         <td>
-                            <a href="words-edit.php?item=<?php echo $item->id ?>" class="text-info mr-2">Edit</a>
-                            <a href="words-delete.php?item=<?php echo $item->id ?>" class="text-danger mr-2">Delete</a>
+                            <a href="./words-edit.php?item=<?php echo $item->id ?>" class="text-info mr-2">Edit</a>
+                            <a href="./words-delete.php?item=<?php echo $item->id ?>" class="text-danger mr-2">Delete</a>
                         </td>
                     </tr>
                 <?php } ?>

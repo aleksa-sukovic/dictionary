@@ -6,4 +6,4 @@ if (isset($_GET['item'])) {
     wordTranslations()->destroy($_GET['item']);
 }
 
-redirect('../../Word/Pages/words-edit.php?item=' . $_GET['word']);
+redirect('/Word/Pages/words-edit.php?item=' . $_GET['item']);

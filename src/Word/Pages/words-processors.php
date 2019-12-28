@@ -19,7 +19,7 @@ if (empty($_SESSION['errors'])) {
     $language = words()->save($_POST);
 
     session_write_close();
-    redirect('../words-edit.php?item=' . $language->id);
+    redirect('./words-edit.php?item=' . $language->id);
 
     exit(0);
 }
@@ -28,8 +28,8 @@ if (empty($_SESSION['errors'])) {
 session_write_close();
 
 if (isset($_POST['id'])) {
-    redirect('../words-edit.php?item=' . $_POST['id']);
+    redirect('./words-edit.php?item=' . $_POST['id']);
 } else {
-    redirect('../words-edit.php');
+    redirect('./words-edit.php');
 }
 
