@@ -1,12 +1,7 @@
 <?php
     require_once '../../autoload.php';
 
-    // Handle errors
-    session_start();
-    $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
-    $_SESSION['errors'] = [];
-    session_write_close();
-
+    $errors = fetchErrors();
     $activeItem = isset($_GET['item']) ? wordFormTypes()->findById($_GET['item']) : null;
 ?>
 <!doctype html>
@@ -46,13 +41,16 @@
             </div>
         </div>
 
-        <div class="row mt-2">
-            <div class="col-sm-6 offset-3">
-                <?php foreach ($errors as $error => $message) { ?>
-                    <p class="text-danger"><?php echo $message ?></p>
-                <?php } ?>
+        <!-- Errors -->
+        <?php if (count($errors)) { ?>
+            <div class="row mt-2">
+                <div class="col-sm-6 offset-3">
+                    <?php foreach ($errors as $error => $message) { ?>
+                        <div class="alert alert-danger"><?php echo $message ?></div>
+                    <?php } ?>
+                </div>
             </div>
-        </div>
+        <?php } ?>
 
         <div class="row mt-2">
             <div class="col-sm-6 offset-3">
@@ -67,11 +65,11 @@
                     <div class="form-group">
                         <label for="label">Value:</label>
 
-                        <input type="text" class="form-control" id="label" name="value" value="<?php
-                            if ($activeItem) {
-                                echo $activeItem->value;
-                            }
-                        ?>" >
+                        <input type="text"
+                               class="form-control"
+                               id="label"
+                               name="value"
+                               value="<?php if ($activeItem) echo $activeItem->value ?>">
                     </div>
 
                     <!-- Submit -->
