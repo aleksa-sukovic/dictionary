@@ -36,12 +36,12 @@
         <div class="table-responsive">
             <table class="table table-striped table-hover table-sm">
                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Label</th>
-                    <th>Code</th>
-                    <th>Actions</th>
-                </tr>
+               <tr>
+                   <th>#</th>
+                   <th>Label</th>
+                   <th>Code</th>
+                   <th>Actions</th>
+               </tr>
                </thead>
 
                 <tbody>
@@ -51,8 +51,8 @@
                             <td><?php echo $language->label; ?></td>
                             <td><?php echo $language->code; ?></td>
                             <td>
-                                <a href="languages-edit.php?language=<?php echo $language->id ?>" class="text-info mr-2">Edit</a>
-                                <a href="languages-delete.php?language=<?php echo $language->id ?>" class="text-danger mr-2">Delete</a>
+                                <a href="languages-edit.php?item=<?php echo $language->id ?>" class="text-info mr-2">Edit</a>
+                                <a href="languages-delete.php?item=<?php echo $language->id ?>" class="text-danger mr-2">Delete</a>
                             </td>
                         </tr>
                     <?php } ?>

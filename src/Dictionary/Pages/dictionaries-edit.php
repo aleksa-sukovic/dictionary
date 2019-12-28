@@ -57,7 +57,7 @@
             <div class="col-sm-6 offset-3">
                 <form action="dictionaries-processors.php" method="POST">
 
-                    <!-- Language ID -->
+                    <!-- ID -->
                     <?php if ($activeItem) { ?>
                     <input type="hidden" value="<?php echo $activeItem->id; ?>" name="id" id="id">
                     <?php } ?>

@@ -1,13 +1,8 @@
 <?php
     require_once '../../autoload.php';
 
-    // Handle errors
-    session_start();
-    $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
-    $_SESSION['errors'] = [];
-    session_write_close();
-
-    $activeLanguage = isset($_GET['language']) ? languages()->findById($_GET['language']) : null;
+    $errors         = fetchErrors();
+    $activeLanguage = isset($_GET['item']) ? languages()->findById($_GET['item']) : null;
 ?>
 <!doctype html>
 <html lang="en">
@@ -46,19 +41,22 @@
             </div>
         </div>
 
-        <div class="row mt-2">
-            <div class="col-sm-6 offset-3">
-                <?php foreach ($errors as $error => $message) { ?>
-                    <p class="text-danger"><?php echo $message ?></p>
-                <?php } ?>
+        <!-- Errors -->
+        <?php if (count($errors)) { ?>
+            <div class="row mt-2">
+                <div class="col-sm-6 offset-3">
+                    <?php foreach ($errors as $error => $message) { ?>
+                        <div class="alert alert-danger"><?php echo $message ?></div>
+                    <?php } ?>
+                </div>
             </div>
-        </div>
+        <?php } ?>
 
         <div class="row mt-2">
             <div class="col-sm-6 offset-3">
                 <form action="languages-processors.php" method="POST">
 
-                    <!-- Language ID -->
+                    <!-- ID -->
                     <?php if ($activeLanguage) { ?>
                     <input type="hidden" value="<?php echo $activeLanguage->id; ?>" name="id" id="id">
                     <?php } ?>
@@ -67,22 +65,22 @@
                     <div class="form-group">
                         <label for="label">Code:</label>
 
-                        <input type="text" class="form-control" id="label" name="code" value="<?php
-                            if ($activeLanguage) {
-                                echo $activeLanguage->code;
-                            }
-                        ?>" required>
+                        <input type="text"
+                               class="form-control"
+                               id="label"
+                               name="code"
+                               value="<?php if ($activeLanguage) echo $activeLanguage->code ?>">
                     </div>
 
                     <!-- Language label -->
                     <div class="form-group">
                         <label for="label">Label:</label>
 
-                        <input type="text" class="form-control" id="label" name="label" value="<?php
-                            if ($activeLanguage) {
-                                echo $activeLanguage->label;
-                            }
-                        ?>" >
+                        <input type="text"
+                               class="form-control"
+                               id="label"
+                               name="label"
+                               value="<?php if ($activeLanguage) echo $activeLanguage->label ?>">
                     </div>
 
                     <!-- Submit -->
