@@ -17,10 +17,21 @@ class WordFormRepository extends ObjectRepository
         $this->transformer = new WordFormTransformer($connection);
     }
 
-    public function forTranslation($id)
+    public function forTranslation($id, $params = [])
     {
         $id = wordTranslations()->transformer->sqlValue($id, 'id');
         $query = "SELECT * FROM word_forms WF WHERE WF.word_translation_id = $id";
+        $transformer = $this->transformer;
+
+        $filterParams = array_filter($params, function ($value, $key) {
+            return $value;
+        }, ARRAY_FILTER_USE_BOTH);
+        $filterParams = array_map(function ($key) use ($params, $transformer) {
+            return $key . ' = ' . $transformer->sqlValue($params[$key], $key);
+        }, array_keys($filterParams));
+        $filterParams = implode(' AND ', $filterParams);
+        $query = $filterParams ? "$query AND $filterParams" : $query;
+
         $result = $this->connection->query($query);
 
         if (!$result) {

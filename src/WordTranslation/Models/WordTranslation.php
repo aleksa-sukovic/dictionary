@@ -39,10 +39,10 @@ class WordTranslation
         return $this->language;
     }
 
-    public function forms($refresh = false)
+    public function forms($params = [], $refresh = false)
     {
         if (!$this->forms || $refresh) {
-            $this->forms = wordForms()->forTranslation($this->id);
+            $this->forms = wordForms()->forTranslation($this->id, $params);
         }
 
         return $this->forms;
