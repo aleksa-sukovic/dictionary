@@ -106,6 +106,7 @@
             </div>
         </div>
 
+        <!-- Translations -->
         <div class="row mt-4">
             <div class="col-sm-12">
                 <div class="bg-light rounded p-4">
