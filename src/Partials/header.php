@@ -1,5 +1,5 @@
 <div>
-    <nav class="navbar navbar-light fixed-top bg-header flex-md-nowrap p-3">
+    <nav class="navbar navbar-light fixed-top bg-header flex-md-nowrap p-3 border-bottom">
         <a class="navbar-brand mr-0" href="/index.php">Dictionary</a>
 
         <form class="w-100 form-inline" action="/Word/Pages/words.php">
