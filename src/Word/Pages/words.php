@@ -31,18 +31,18 @@ require_once '../../autoload.php';
     <!-- Main content -->
     <div class="p-4">
         <div class="text-right">
-            <a class="btn btn-outline-primary mb-4" role="button" href="words-edit.php">Add new</a>
+            <a class="btn btn-outline-primary btn-sm mb-4" role="button" href="words-edit.php">Add new</a>
         </div>
         <div class="table-responsive">
-            <table class="table table-striped table-hover table-sm">
+            <table class="table table-striped table-hover table-bordered table-sm">
                 <thead>
                 <tr>
-                    <th>#ID</th>
+                    <th>ID</th>
                     <th>Value</th>
                     <th>Slug</th>
                     <th>Type</th>
                     <th>Languages</th>
-                    <th>Actions</th>
+                    <th class="text-center">Actions</th>
                 </tr>
                 </thead>
 
@@ -54,7 +54,7 @@ require_once '../../autoload.php';
                         <td><?php echo $item->slug ?></td>
                         <td><?php if ($item->type()) echo $item->type()->label; else echo '-'; ?></td>
                         <td><?php echo implode(',', $item->availableLanguages()) ?></td>
-                        <td>
+                        <td class="text-center">
                             <a href="./words-edit.php?item=<?php echo $item->id ?>" class="text-info mr-2">Edit</a>
                             <a href="./words-delete.php?item=<?php echo $item->id ?>" class="text-danger mr-2">Delete</a>
                         </td>

@@ -31,17 +31,17 @@ $items = dictionaries()->all();
     <!-- Main content -->
     <div class="p-4">
         <div class="text-right">
-            <a class="btn btn-outline-primary mb-4" role="button" href="dictionaries-edit.php">Add new</a>
+            <a class="btn btn-outline-primary btn-sm mb-4" role="button" href="dictionaries-edit.php">Add new</a>
         </div>
         <div class="table-responsive">
-            <table class="table table-striped table-hover table-sm">
+            <table class="table table-striped table-hover table-bordered table-sm">
                 <thead>
                 <tr>
-                    <th>#ID</th>
+                    <th>ID</th>
                     <th>Name</th>
                     <th>Language</th>
                     <th>Description</th>
-                    <th>Actions</th>
+                    <th class="text-center">Actions</th>
                 </tr>
                 </thead>
 
@@ -52,7 +52,7 @@ $items = dictionaries()->all();
                         <td><?php echo $item->name; ?></td>
                         <td><?php echo $item->language()->label ?></td>
                         <td><?php if ($item->description) echo $item->description; else echo '-' ?></td>
-                        <td>
+                        <td class="text-center">
                             <a href="dictionaries-edit.php?item=<?php echo $item->id ?>" class="text-info mr-2">Edit</a>
                             <a href="dictionaries-delete.php?item=<?php echo $item->id ?>" class="text-danger mr-2">Delete</a>
                         </td>

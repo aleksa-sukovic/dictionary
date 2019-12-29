@@ -29,9 +29,14 @@
 
         <!-- Main content -->
         <div class="container-fluid">
-            <h1 class="h4 text-center mt-4">Dictionary project</h1>
-
-            <p class="lead text-center">Manage translations in multiple languages</p>
+            <div class="row mt-4">
+                <div class="col-sm-12">
+                    <div class="bg-light p-4 rounded">
+                        <h1 class="display-4">Dictionary project</h1>
+                        <p class="lead">Keep track of words, organize them in dictionaries, translate them into different languages and much more.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

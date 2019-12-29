@@ -42,31 +42,29 @@
     <div class="p-4">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="h4 text-center mt-2">Word translation</h1>
-
-                <p class="lead text-center text-muted">
-                    <?php if ($activeItem) echo 'Edit'; else echo 'Add new'; ?>
-                </p>
+                <div class="bg-light p-4 rounded">
+                    <h1 class="display-4">Word translations</h1>
+                    <p class="lead">Word translation represents a version of a word in some language.</p>
+                    <p>Define all aspects of particular word translation including its forms.</p>
+                </div>
             </div>
         </div>
 
         <!-- Errors -->
         <?php if (count($errors)) { ?>
-            <div class="row mt-2">
-                <div class="col-sm-6 offset-3">
+            <div class="row">
+                <div class="col-sm-12">
                     <?php foreach ($errors as $error => $message) { ?>
-                        <div class="alert alert-danger"><?php echo $message ?></div>
+                        <div class="alert alert-danger mb-0 mt-4"><?php echo $message ?></div>
                     <?php } ?>
                 </div>
             </div>
         <?php } ?>
 
         <!-- Input form -->
-        <div class="row mt-2">
-            <div class="col-sm-6 offset-3">
-                <form action="word-translations-processors.php" method="POST">
-                    <p class="lead">Base word</p>
-
+        <div class="row mt-4">
+            <div class="col-sm-12">
+                <form action="word-translations-processors.php" method="POST" class="bg-light round p-4">
                     <!-- ID -->
                     <?php if ($activeItem) { ?>
                     <input type="hidden" name="id" value="<?php echo $activeItem->id ?>">
@@ -112,25 +110,27 @@
             </div>
         </div>
 
-        <div class="row mt-2">
-            <div class="col-sm-6 offset-3">
-                <!-- Word forms -->
-                <div class="d-flex flex-row justify-content-between mt-5">
-                    <p class="lead">Forms</p>
-                    <a href="/WordForm/Pages/word-forms-edit.php?translation=<?php echo $activeItem->id ?>" class="text-info font-weight-lighter">
-                        Add form
-                    </a>
+        <div class="row mt-4">
+            <div class="col-sm-12">
+                <div class="bg-light rounded p-4">
+                    <!-- Word forms -->
+                    <div class="d-flex flex-row justify-content-between">
+                        <p class="h4">Forms</p>
+                        <a href="/WordForm/Pages/word-forms-edit.php?translation=<?php echo $activeItem->id ?>" class="text-info font-weight-lighter">
+                            Add form
+                        </a>
+                    </div>
+
+                    <!-- Unsaved translation warning -->
+                    <?php if (!$activeItem) { ?>
+                        <p class="alert alert-warning">
+                            Save the word in order to add its forms.
+                        </p>
+                    <?php } ?>
+
+                    <!-- Forms -->
+                    <?php if ($activeItem) require_once fullPath('WordForm/Pages/word-forms.php') ?>
                 </div>
-
-                <!-- Unsaved translation warning -->
-                <?php if (!$activeItem) { ?>
-                    <p class="alert alert-warning">
-                        Save the word in order to add its forms.
-                    </p>
-                <?php } ?>
-
-                <!-- Forms -->
-                <?php if ($activeItem) require_once fullPath('WordForm/Pages/word-forms.php') ?>
             </div>
         </div>
     </div>

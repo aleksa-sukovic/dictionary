@@ -1,5 +1,5 @@
 <div class="row">
-    <nav class="col-sm-12 bg-light sidebar">
+    <nav class="col-sm-12 bg-header">
         <ul class="nav justify-content-center">
 
             <!-- Home -->
@@ -18,7 +18,7 @@
 
             <!-- Words -->
             <li class="nav-item">
-                <a href="/Word/Pages/words.php" class="nav-link <?php if (isPageActive(['words.php', 'words-edit.php', 'word-translations-edit.php'])) echo 'active' ?>">
+                <a href="/Word/Pages/words.php" class="nav-link <?php if (isPageActive(['words.php', 'words-edit.php', 'word-translations-edit.php', 'word-forms-edit.php'])) echo 'active' ?>">
                     Words
                 </a>
             </li>

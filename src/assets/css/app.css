@@ -6,3 +6,7 @@
 .active {
     font-weight: bold;
 }
+
+.bg-header {
+    background-color: #f3f4f5 !important;
+}

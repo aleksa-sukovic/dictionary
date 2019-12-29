@@ -38,25 +38,28 @@
     <div class="p-4">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="h4 text-center mt-2">Word types</h1>
-
-                <p class="lead text-center text-muted">
-                    <?php if ($activeItem) echo 'Edit'; else echo 'Add new'; ?>
-                </p>
+                <div class="bg-light p-4 rounded">
+                    <h1 class="display-4">Word types</h1>
+                    <p class="lead">Word type represents a group of particular word.</p>
+                    <p>Define all aspects of word type.</p>
+                </div>
             </div>
         </div>
 
-        <div class="row mt-2">
-            <div class="col-sm-6 offset-3">
-                <?php foreach ($errors as $error => $message) { ?>
-                    <p class="text-danger"><?php echo $message ?></p>
-                <?php } ?>
+        <!-- Errors -->
+        <?php if (count($errors)) { ?>
+            <div class="row">
+                <div class="col-sm-12">
+                    <?php foreach ($errors as $error => $message) { ?>
+                        <div class="alert alert-danger mb-0 mt-4"><?php echo $message ?></div>
+                    <?php } ?>
+                </div>
             </div>
-        </div>
+        <?php } ?>
 
-        <div class="row mt-2">
-            <div class="col-sm-6 offset-3">
-                <form action="word-types-processors.php" method="POST">
+        <div class="row mt-4">
+            <div class="col-sm-12">
+                <form action="word-types-processors.php" method="POST" class="bg-light rounded p-4">
 
                     <!-- Language ID -->
                     <?php if ($activeItem) { ?>

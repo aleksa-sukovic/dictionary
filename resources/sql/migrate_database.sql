@@ -87,3 +87,18 @@ CREATE TABLE word_forms (
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
+
+CREATE TABLE dictionaries_words (
+    dictionary_id INT,
+    word_id INT,
+
+    CONSTRAINT FK_DICTIONARIES_WORDS_DICTIONARY FOREIGN KEY (dictionary_id)
+            REFERENCES dictionaries(id)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE,
+
+    CONSTRAINT FK_DICTIONARIES_WORDS_WORD FOREIGN KEY (word_id)
+                REFERENCES words(id)
+                ON DELETE CASCADE
+                ON UPDATE CASCADE
+);

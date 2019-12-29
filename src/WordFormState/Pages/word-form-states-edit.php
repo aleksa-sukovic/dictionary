@@ -33,28 +33,28 @@
     <div class="p-4">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="h4 text-center mt-2">Word form states</h1>
-
-                <p class="lead text-center text-muted">
-                    <?php if ($activeItem) echo 'Edit'; else echo 'Add new'; ?>
-                </p>
+                <div class="bg-light p-4 rounded">
+                    <h1 class="display-4">Word form state</h1>
+                    <p class="lead">Word form state represents a state in which a particular word form can be.</p>
+                    <p>Define all aspects of word form state.</p>
+                </div>
             </div>
         </div>
 
         <!-- Errors -->
         <?php if (count($errors)) { ?>
-            <div class="row mt-2">
-                <div class="col-sm-6 offset-3">
+            <div class="row">
+                <div class="col-sm-12">
                     <?php foreach ($errors as $error => $message) { ?>
-                        <div class="alert alert-danger"><?php echo $message ?></div>
+                        <div class="alert alert-danger mb-0 mt-4"><?php echo $message ?></div>
                     <?php } ?>
                 </div>
             </div>
         <?php } ?>
 
-        <div class="row mt-2">
-            <div class="col-sm-6 offset-3">
-                <form action="word-form-states-processors.php" method="POST">
+        <div class="row mt-4">
+            <div class="col-sm-12">
+                <form action="word-form-states-processors.php" method="POST" class="bg-light rounded p-4">
                     <!-- ID -->
                     <?php if ($activeItem) { ?>
                     <input type="hidden" value="<?php echo $activeItem->id; ?>" name="id" id="id">

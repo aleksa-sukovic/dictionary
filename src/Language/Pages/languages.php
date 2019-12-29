@@ -31,16 +31,16 @@
     <!-- Main content -->
     <div class="p-4">
         <div class="text-right">
-            <a class="btn btn-outline-primary mb-4" role="button" href="languages-edit.php">Add new</a>
+            <a class="btn btn-outline-primary btn-sm mb-4" role="button" href="languages-edit.php">Add new</a>
         </div>
         <div class="table-responsive">
-            <table class="table table-striped table-hover table-sm">
+            <table class="table table-striped table-hover table-bordered table-sm">
                <thead>
                <tr>
                    <th>#</th>
                    <th>Label</th>
-                   <th>Code</th>
-                   <th>Actions</th>
+                   <th class="w-25">Code</th>
+                   <th class="text-center w-25">Actions</th>
                </tr>
                </thead>
 
@@ -50,7 +50,7 @@
                             <td><?php echo $language->id; ?></td>
                             <td><?php echo $language->label; ?></td>
                             <td><?php echo $language->code; ?></td>
-                            <td>
+                            <td class="text-center">
                                 <a href="languages-edit.php?item=<?php echo $language->id ?>" class="text-info mr-2">Edit</a>
                                 <a href="languages-delete.php?item=<?php echo $language->id ?>" class="text-danger mr-2">Delete</a>
                             </td>

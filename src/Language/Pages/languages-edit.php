@@ -33,28 +33,28 @@
     <div class="p-4">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="h4 text-center mt-2">Languages</h1>
-
-                <p class="lead text-center text-muted">
-                    <?php if ($activeLanguage) echo 'Edit'; else echo 'Add new'; ?>
-                </p>
+                <div class="bg-light p-4 rounded">
+                    <h1 class="display-4">Language</h1>
+                    <p class="lead">Language represents a method of human communication, either spoken or written, consisting of the use of words in a structured and conventional way.</p>
+                    <p>Define all aspects of particular language.</p>
+                </div>
             </div>
         </div>
 
         <!-- Errors -->
         <?php if (count($errors)) { ?>
-            <div class="row mt-2">
-                <div class="col-sm-6 offset-3">
+            <div class="row">
+                <div class="col-sm-12">
                     <?php foreach ($errors as $error => $message) { ?>
-                        <div class="alert alert-danger"><?php echo $message ?></div>
+                        <div class="alert alert-danger mb-0 mt-4"><?php echo $message ?></div>
                     <?php } ?>
                 </div>
             </div>
         <?php } ?>
 
-        <div class="row mt-2">
-            <div class="col-sm-6 offset-3">
-                <form action="languages-processors.php" method="POST">
+        <div class="row mt-4">
+            <div class="col-sm-12">
+                <form action="languages-processors.php" method="POST" class="bg-light rounded p-4">
 
                     <!-- ID -->
                     <?php if ($activeLanguage) { ?>

@@ -17,7 +17,8 @@
 <!-- Word forms list -->
 <?php if (count($activeItem->forms($filterParams))) { ?>
 <div>
-    <div class="mb-3">
+    <!-- Filter form -->
+    <div class="mb-4 mt-2">
         <form action="/WordTranslation/Pages/word-translations-edit.php" method="GET" class="form-inline">
             <input type="hidden" value="<?php echo $activeItem->id ?>" name="item">
 
@@ -43,15 +44,16 @@
             <button type="submit" class="btn btn-outline-secondary ml-3">Filter</button>
         </form>
     </div>
-    <table class="table table-hover table-responsive table-sm">
+
+    <table class="table table-hover table-bordered table-sm mb-0">
         <thead>
-        <tr>
-            <th>Value</th>
-            <th>Type</th>
-            <th>State</th>
-            <th>Word</th>
-            <th>Actions</th>
-        </tr>
+            <tr>
+                <th>Value</th>
+                <th>Type</th>
+                <th>State</th>
+                <th>Word</th>
+                <th class="text-center w-25">Actions</th>
+            </tr>
         </thead>
         <tbody>
         <?php foreach ($activeItem->forms($filterParams) as $form) { ?>
@@ -60,7 +62,7 @@
                 <td><?php echo $form->type()->value ?></td>
                 <td><?php echo $form->state()->value ?></td>
                 <td><?php echo $form->translation()->value ?></td>
-                <td>
+                <td class="text-center">
                     <a href="/WordForm/Pages/word-forms-edit.php?item=<?php echo $form->id ?>" class="text-info mr-2">Edit</a>
                     <a href="/WordForm/Pages/word-forms-delete.php?item=<?php echo $form->id ?>&translation=<?php echo $form->translation()->id ?>" class="text-danger mr-2">Delete</a>
                 </td>

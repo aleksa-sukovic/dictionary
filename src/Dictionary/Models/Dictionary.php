@@ -10,6 +10,8 @@ class Dictionary
     public $name;
     public $description;
 
+    public $words;
+
     public function __construct($id, $languageId, $name, $description = null)
     {
         $this->id = $id;
@@ -25,6 +27,15 @@ class Dictionary
         }
 
         return $this->language;
+    }
+
+    public function words($params = [], $refresh = false)
+    {
+        if (!$this->words || $refresh) {
+            $this->words = dictionaries()->words($this->id, $params);
+        }
+
+        return $this->words;
     }
 
     public function __toString()
