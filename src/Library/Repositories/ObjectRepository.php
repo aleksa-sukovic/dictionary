@@ -5,20 +5,17 @@ namespace Aleksa\Library\Repositories;
 use Aleksa\Library\Exceptions\ItemNotDeletedException;
 use Aleksa\Library\Exceptions\ItemNotFoundException;
 use Aleksa\Library\Exceptions\ItemNotSavedException;
+use Aleksa\Library\Services\FilterService;
 use Aleksa\Library\Transformers\ObjectTransformer;
 use mysqli as MySQL;
 
 class ObjectRepository
 {
-    /**
-     * @var MySQL
-     */
-    protected $connection;
+    protected MySQL $connection;
 
-    /**
-     * @var ObjectTransformer
-     */
-    protected $transformer;
+    protected ObjectTransformer $transformer;
+
+    protected FilterService $filterService;
 
     protected $tableName;
     protected $primaryKey;
@@ -26,6 +23,7 @@ class ObjectRepository
     public function __construct(MySQL $connection)
     {
         $this->connection = $connection;
+        $this->filterService = new FilterService;
     }
 
     public function all()
