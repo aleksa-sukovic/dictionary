@@ -1,31 +1,20 @@
 <?php
 
+use Aleksa\Library\Exceptions\ValidationException;
+
 require_once '../../autoload.php';
 
-session_start();
-$_SESSION['errors'] = [];
+try {
+   requestValidator()->validateWithThrow([
+       'label' => 'Label is required.',
+   ], $_POST);
 
-// Validate label
-if (empty($_POST['label'])) {
-    $_SESSION['errors']['label'] = 'Label is required.';
+    $item = wordTypes()->save($_POST);
+    redirect('./word-types-edit.php?item=' . $item->id);
+} catch (ValidationException $e) {
+    if (isset($_POST['id'])) {
+        redirect('./word-types-edit.php?item=' . $_POST['id']);
+    } else {
+        redirect('./word-types-edit.php');
+    }
 }
-
-// Handle no errors
-if (empty($_SESSION['errors'])) {
-    $language = wordTypes()->save($_POST);
-
-    session_write_close();
-    redirect('./word-types-edit.php?item=' . $language->id);
-
-    exit(0);
-}
-
-// Handle errors
-session_write_close();
-
-if (isset($_POST['id'])) {
-    redirect('./word-types-edit.php?item=' . $_POST['id']);
-} else {
-    redirect('./word-types-edit.php');
-}
-

@@ -1,35 +1,21 @@
 <?php
 
+use Aleksa\Library\Exceptions\ValidationException;
+
 require_once '../../autoload.php';
 
-session_start();
-$_SESSION['errors'] = [];
+try {
+   requestValidator()->validateWithThrow([
+       'value'   => 'Value is required.',
+       'type_id' => 'Word type is required.',
+   ], $_POST);
 
-// Validate value
-if (empty($_POST['value'])) {
-    $_SESSION['errors']['label'] = 'Value is required.';
+    $word = words()->save($_POST);
+    redirect('./words-edit.php?item=' . $word->id);
+} catch (ValidationException $e) {
+    if (isset($_POST['id'])) {
+        redirect('./words-edit.php?item=' . $_POST['id']);
+    } else {
+        redirect('./words-edit.php');
+    }
 }
-
-if (empty($_POST['type_id'])) {
-    $_SESSION['errors']['type_id'] = 'Word type is required';
-}
-
-// Handle no errors
-if (empty($_SESSION['errors'])) {
-    $language = words()->save($_POST);
-
-    session_write_close();
-    redirect('./words-edit.php?item=' . $language->id);
-
-    exit(0);
-}
-
-// Handle errors
-session_write_close();
-
-if (isset($_POST['id'])) {
-    redirect('./words-edit.php?item=' . $_POST['id']);
-} else {
-    redirect('./words-edit.php');
-}
-
