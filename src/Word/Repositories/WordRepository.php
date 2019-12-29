@@ -51,19 +51,27 @@ class WordRepository extends ObjectRepository
         return $transformed;
     }
 
-    public function missingLanguages($id)
+    public function search($q, $languageId)
     {
-        $primaryKey = $this->transformer->sqlValue($id, $this->primaryKey);
-        $query = "SELECT * FROM languages L WHERE NOT EXISTS (SELECT * FROM word_translations WT WHERE WT.word_id = $primaryKey AND WT.language_id = L.id)";
+        $query  = "SELECT * FROM words W ";
+
+        if ($q && $languageId) {
+            $query .= "WHERE W.value LIKE '$q' AND EXISTS (SELECT * FROM word_translations WT WHERE WT.word_id = W.id AND WT.language_id = $languageId)";
+        } else if ($q) {
+            $query .= "WHERE W.value LIKE '$q'";
+        } else if ($languageId) {
+            $query .= "WHERE EXISTS (SELECT * FROM word_translations WT WHERE WT.word_id = W.id AND WT.language_id = $languageId)";
+        }
+
         $result = $this->connection->query($query);
 
         if (!$result) {
             return [];
         }
 
-        $transformed = languages()->transformer->toObjectArray($result);
-        mysqli_free_result($result);
+        $transformed = $this->transformer->toObjectArray($result);
 
+        mysqli_free_result($result);
         return $transformed;
     }
 

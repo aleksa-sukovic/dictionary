@@ -1,7 +1,7 @@
 <?php
 require_once '../../autoload.php';
 
-$items = words()->all();
+    $items = words()->search($_GET['q'] ?? null, $_GET['l'] ?? null);
 ?>
 <!doctype html>
 <html lang="en">

@@ -29,6 +29,15 @@ function fetchErrors()
     return $errors;
 }
 
+function value($array, $param)
+{
+    if (!isset($array[$param])) {
+        return null;
+    }
+
+    return $array[$param];
+}
+
 function fullPath($path)
 {
     return $_SERVER['DOCUMENT_ROOT'] . '/' . $path;
